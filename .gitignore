@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 # Ignore Build folder. 
 /[Bb]uilds/
+
+# Ignore .vscode folder
+.vscode/
