@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
     }
-    private void CheckCollision(Collision collision)
+    private void CheckCollision()
     {
         Collider AthleteCollider = Athlete.GetComponent<Collider>();
         Collider BarCollider = Bar.GetComponent<Collider>();
@@ -46,6 +46,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        CheckCollision();
     }
 }
