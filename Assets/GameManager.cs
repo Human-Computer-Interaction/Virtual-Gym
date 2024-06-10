@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void CheckCollision(Collision collision)
     {
         Collider AthleteCollider = Athlete.GetComponent<Collider>();
         Collider BarCollider = Bar.GetComponent<Collider>();
