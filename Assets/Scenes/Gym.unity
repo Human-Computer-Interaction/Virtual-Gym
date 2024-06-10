@@ -5737,6 +5737,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 3853268898807207900, guid: 27a7cb442852a03419a5a9b9297db611, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 266f66baae428b34d94117313d06d709, type: 2}
+    - target: {fileID: 6148737315974723067, guid: 27a7cb442852a03419a5a9b9297db611, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 266f66baae428b34d94117313d06d709, type: 2}
     - target: {fileID: 7882376022164389543, guid: 27a7cb442852a03419a5a9b9297db611, type: 3}
       propertyPath: m_TagString
       value: Athlete
