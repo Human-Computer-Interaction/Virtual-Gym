@@ -11,6 +11,7 @@ TagManager:
   - Bar
   - Abdominal
   - Athlete
+  - NPC
   layers:
   - Default
   - TransparentFX

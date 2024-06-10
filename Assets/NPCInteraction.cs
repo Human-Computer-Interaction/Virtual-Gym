@@ -4,24 +4,31 @@ using UnityEngine;
 using UnityEngine.UI;
 public class NPCInteraction : MonoBehaviour
 {
-    public GameObject dialoguePanel;
-    public Text dialogueText;
+    private GameObject dialoguePanel;
+    private Text dialogueText;
 
     public string[] dialogue;
     private int index;
     public float wordSpeed;
-    public bool playerIsClose;
-
-    private void OnCollisionEnter(Collision collision)
+    public bool playerIsClose = false;
+    void Start()
     {
-        if (collision.gameObject.name == "NPC")
+        dialoguePanel = GameObject.Find("DialoguePanel");
+        dialoguePanel.SetActive(false);
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Athlete"))
         {
-            playerIsClose = true;
-            Debug.Log("Collision detected in NPC!!");
+            dialoguePanel.SetActive(true);
         }
     }
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Athlete"))
+        {
+            dialoguePanel.SetActive(false);
+        }
     }
 }
