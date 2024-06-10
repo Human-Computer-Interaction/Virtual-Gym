@@ -17,6 +17,7 @@ public class NPCInteraction : MonoBehaviour
         if (collision.gameObject.name == "NPC")
         {
             playerIsClose = true;
+            Debug.Log("Collision detected in NPC!!");
         }
     }
     void Update()
