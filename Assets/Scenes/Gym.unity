@@ -3880,8 +3880,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.002, z: 0.25}
-  m_Center: {x: -0.08, y: 0.09, z: 0}
+  m_Size: {x: 0.46, y: 0.002, z: 0.67}
+  m_Center: {x: -0.08, y: 0.09, z: 0.21}
 --- !u!65 &808596008
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3901,8 +3901,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.002, z: 0.25}
-  m_Center: {x: -0.08, y: -0.02, z: 0}
+  m_Size: {x: 0.4, y: 0.002, z: 0.55}
+  m_Center: {x: -0.08, y: -0.02, z: 0.15}
 --- !u!65 &808596009
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3922,8 +3922,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.001, y: 0.098, z: 0.25}
-  m_Center: {x: 0.12, y: 0.05, z: 0}
+  m_Size: {x: 0.001, y: 0.16, z: -0.49}
+  m_Center: {x: 0.12, y: 0.02, z: 0.13}
 --- !u!65 &808596010
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3943,8 +3943,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.001, y: 0.098, z: 0.25}
-  m_Center: {x: -0.285, y: 0.05, z: 0}
+  m_Size: {x: 0.001, y: 0.19, z: 0.49}
+  m_Center: {x: -0.29, y: 0.02, z: 0.09}
 --- !u!65 &808596011
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3964,7 +3964,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.09, z: 0.001}
+  m_Size: {x: 0.43, y: 0.09, z: 0.001}
   m_Center: {x: -0.09, y: 0.05, z: -0.12}
 --- !u!65 &808596012
 BoxCollider:
@@ -3985,8 +3985,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.09, z: 0.001}
-  m_Center: {x: -0.09, y: 0.05, z: 0.119}
+  m_Size: {x: 0.4, y: 0.09, z: -0.01}
+  m_Center: {x: -0.09, y: 0.05, z: 0.4}
 --- !u!4 &808596013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9c5cf343a5eede64a863ebca588066cf, type: 3}
