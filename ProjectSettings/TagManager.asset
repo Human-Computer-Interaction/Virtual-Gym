@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Gym-Collider
+  - Bike
+  - Treadmills
+  - Leg Extension
+  - Bar
+  - Abdominal
+  - Athlete
   layers:
   - Default
   - TransparentFX
