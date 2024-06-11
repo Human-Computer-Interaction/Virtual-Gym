@@ -2,23 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using TMPro;
 using UnityEngine;
 public struct PlayerStats
 {
-   
+
     public float Weight;
     public float Stamina;
     public float Money;
     public float Height;
     public int Age;
 
-    
 
-    public float CaloriesBurned ()
+
+    public float CaloriesBurned()
     {
         return 0.0f;
     }
-    
+
 
 
 
@@ -55,16 +56,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject WeightScale;
     [SerializeField] GameObject WeightTrack;
     [SerializeField] GameObject Ball12;
+    [SerializeField] GameObject Panel;
 
-  
+
     private Collider BarCollider;
     private Collider AthleteCollider;
-
+    private TextMesh textMesh;
     public PlayerStats playerStats;
     public float Timer = 0f;
 
     public float BMI;
-    
+
 
     public void Awake()
     {
@@ -74,7 +76,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this);
 
         }
-        else if (manager != this && manager != null) 
+        else if (manager != this && manager != null)
         {
             Destroy(this);
         }
@@ -98,17 +100,17 @@ public class GameManager : MonoBehaviour
 
         if (AthleteCollider != null && BarCollider != null)
             if (AthleteCollider.bounds.Intersects(BarCollider.bounds))
-                {
-                    Timer += Time.deltaTime;
-                    print("Timer: " + Timer);
-                }
-                
+            {
+                Timer += Time.deltaTime;
+                print("Timer: " + Timer);
+            }
+
         if (AthleteCollider != null && LegCollider != null)
             if (AthleteCollider.bounds.Intersects(LegCollider.bounds))
-                {
-                    Timer += Time.deltaTime;
-                    print("Timer: " + Timer);
-                }
+            {
+                Timer += Time.deltaTime;
+                print("Timer: " + Timer);
+            }
         if (AthleteCollider != null && BikeCollider != null)
             if (AthleteCollider.bounds.Intersects(BikeCollider.bounds))
                 Debug.Log("Collision detected in Bike!!");
@@ -146,7 +148,7 @@ public class GameManager : MonoBehaviour
 
     private float CalculateBMI(PlayerStats playerStats)
     {
-        return playerStats.Weight / (playerStats.Height * playerStats.Height); 
+        return playerStats.Weight / (playerStats.Height * playerStats.Height);
     }
 
     private String BodyTypeBasedOnBmi()
@@ -174,31 +176,38 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
         playerStats = new PlayerStats(70f, 100f, 100f, 1.80f, 30);
         BMI = CalculateBMI(playerStats);
-        print("BMI "+BMI);
-        String bodyType =  BodyTypeBasedOnBmi();
-        print("BodtType: " + bodyType);
-        
-       // CalculateBMI();
+        print("BMI " + BMI);
+        String bodyType = BodyTypeBasedOnBmi();
+        print("BodyType: " + bodyType);
+        var textMeshComponents = Panel.GetComponentsInChildren<TextMeshProUGUI>();
+        print(textMeshComponents.Length);
+        textMeshComponents[0].text = "Weight: " + playerStats.Weight;
+        textMeshComponents[1].text = "Age: " + playerStats.Age;
+        textMeshComponents[2].text = "Height: " + playerStats.Height;
+        textMeshComponents[3].text = "Money: " + playerStats.Money;
+        textMeshComponents[4].text = "Stamina: " + playerStats.Stamina;
+
+
+        // CalculateBMI();
     }
 
 
     void Update()
     {
-        
+
 
         CheckCollision();
         //CheckTrigger();
-        
-        print("Timer: " + Timer);
+
+        //print("Timer: " + Timer);
     }
 
     // private void CheckTrigger()
     // {
-        
-        
+
+
     //     if (AthleteCollider.bounds.Intersects(BarCollider.bounds))
     //     {
     //         Timer += Time.deltaTime;
