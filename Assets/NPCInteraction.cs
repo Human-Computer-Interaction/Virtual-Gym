@@ -85,16 +85,17 @@ public class NPCInteraction : MonoBehaviour
     {
         var inputsFields = characteristicsInputPanel.GetComponentsInChildren<TMP_InputField>();
         gameManager.playerStats.Weight = Math.Abs(float.Parse(inputsFields[0].text));
-        gameManager.playerStats.Height = Math.Abs(float.Parse(inputsFields[1].text));
-        gameManager.playerStats.Age = Math.Abs(int.Parse(inputsFields[2].text));
+        gameManager.playerStats.Age = Math.Abs(int.Parse(inputsFields[1].text));
+        gameManager.playerStats.Height = Math.Abs(float.Parse(inputsFields[2].text))/100f;
+        
         
         characteristicsInputPanel.SetActive(false);
         inputsFields[0].text = "";
         inputsFields[1].text = "";
         inputsFields[2].text = "";
 
-        // print(gameManager.playerStats);
-        // print(gameManager.CalculateBMI(gameManager.playerStats));
+        print(gameManager.playerStats);
+        print(gameManager.CalculateBMI(gameManager.playerStats));
 
     }
 
