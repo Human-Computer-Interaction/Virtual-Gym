@@ -1,13 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class NPCInteraction : MonoBehaviour
 {
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
     public GameObject continueButton;
+    public GameObject characteristicsInputPanel;
+    public GameObject gameManagerComponent;
+    private GameManager gameManager;
 
     public string[] dialogue;
     private int index;
@@ -28,6 +35,10 @@ public class NPCInteraction : MonoBehaviour
             ZeroText();
         }
     }
+    void Start()
+    {
+        gameManager = gameManagerComponent.GetComponent<GameManager>();
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && playerIsClose)
@@ -46,6 +57,7 @@ public class NPCInteraction : MonoBehaviour
         {
             continueButton.SetActive(true);
         }
+        //if index == 
     }
     public void ZeroText()
     {
@@ -62,12 +74,30 @@ public class NPCInteraction : MonoBehaviour
             dialogueText.text = "";
             StartCoroutine(Typing());
         }
-        else
+        else if (index == dialogue.Length - 1)
         {
-            ZeroText();
+            dialoguePanel.SetActive(false);
+            characteristicsInputPanel.SetActive(true);
+            //PlayerStats playerStats = new PlayerStats(70f, 100f, 100f, 1.80f, 30);
         }
+    }
+    public void PassInputsToGameManager()
+    {
+        var inputsFields = characteristicsInputPanel.GetComponentsInChildren<TMP_InputField>();
+        gameManager.playerStats.Weight = Math.Abs(float.Parse(inputsFields[0].text));
+        gameManager.playerStats.Height = Math.Abs(float.Parse(inputsFields[1].text));
+        gameManager.playerStats.Age = Math.Abs(int.Parse(inputsFields[2].text));
+        
+        characteristicsInputPanel.SetActive(false);
+        inputsFields[0].text = "";
+        inputsFields[1].text = "";
+        inputsFields[2].text = "";
+
+        // print(gameManager.playerStats);
+        // print(gameManager.CalculateBMI(gameManager.playerStats));
 
     }
+
     IEnumerator Typing()
     {
         foreach (char letter in dialogue[index].ToCharArray())
