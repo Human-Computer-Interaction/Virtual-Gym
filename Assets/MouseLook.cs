@@ -13,7 +13,8 @@ public class MouseLook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; 
+        //Cursor.lockState = CursorLockMode.Locked;
+        // With locked cursor user can't input into fields, or continue an iteration 
         playerBody.rotation = Quaternion.Euler(0, 90f, 0);
     }
 
