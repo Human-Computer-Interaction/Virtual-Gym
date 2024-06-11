@@ -8070,7 +8070,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500633542}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5045b23f945e9e42aa48e4dfd5f9a57, type: 3}
   m_Name: 
@@ -8079,7 +8079,6 @@ MonoBehaviour:
   Bar: {fileID: 1829610214}
   LegExtension: {fileID: 399681133}
   Bike: {fileID: 693986500}
-  Bike1: {fileID: 0}
   Treadmill1: {fileID: 1426333501}
   Treadmill2: {fileID: 1270173660}
   Mat: {fileID: 960209555}
@@ -8089,6 +8088,8 @@ MonoBehaviour:
   WeightScale: {fileID: 486725668}
   WeightTrack: {fileID: 1771215622}
   Ball12: {fileID: 1219007844}
+  Timer: 0
+  BMI: 0
 --- !u!4 &1500633544
 Transform:
   m_ObjectHideFlags: 0
