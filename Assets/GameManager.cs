@@ -31,9 +31,10 @@ public struct PlayerStats
         this.Height = height;
         this.Age = age;
 
-
-
-
+    }
+    public override string ToString()
+    {
+        return $"Weight: {Weight}, Stamina: {Stamina}, Money: {Money}, Height: {Height}, Age: {Age}";
     }
 
 }
@@ -146,7 +147,8 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Collision detected in Ball12!!");
     }
 
-    private float CalculateBMI(PlayerStats playerStats)
+    // BMI Needs Fixing!
+    public float CalculateBMI(PlayerStats playerStats)
     {
         return playerStats.Weight / (playerStats.Height * playerStats.Height);
     }
@@ -176,7 +178,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        playerStats = new PlayerStats(70f, 100f, 100f, 1.80f, 30);
+        playerStats = new PlayerStats();
+        // Money and Stamina should be RNG
+        playerStats.Money = 100f;
+        playerStats.Stamina = 100f;
         BMI = CalculateBMI(playerStats);
         print("BMI " + BMI);
         String bodyType = BodyTypeBasedOnBmi();
