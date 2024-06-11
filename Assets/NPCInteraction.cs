@@ -87,6 +87,8 @@ public class NPCInteraction : MonoBehaviour
         gameManager.playerStats.Weight = Math.Abs(float.Parse(inputsFields[0].text));
         gameManager.playerStats.Age = Math.Abs(int.Parse(inputsFields[1].text));
         gameManager.playerStats.Height = Math.Abs(float.Parse(inputsFields[2].text))/100f;
+        gameManager.InitStats();
+        gameManager.ActivatePanel();
         
         
         characteristicsInputPanel.SetActive(false);

@@ -64,7 +64,11 @@ public class GameManager : MonoBehaviour
     private Collider AthleteCollider;
     private TextMesh textMesh;
     public PlayerStats playerStats;
+
+    
     public float Timer = 0f;
+
+    public TextMeshProUGUI [] stats;
 
     public float BMI;
 
@@ -174,7 +178,25 @@ public class GameManager : MonoBehaviour
 
         return "";
     }
+    public void InitStats()
+    {
+        var textMeshComponents = Panel.GetComponentsInChildren<TextMeshProUGUI>();
+        
+        textMeshComponents[0].text = "Weight: " + playerStats.Weight;
+        textMeshComponents[1].text = "Age: " + playerStats.Age;
+        textMeshComponents[2].text = "Height: " + playerStats.Height;
+        textMeshComponents[3].text = "Money: " + playerStats.Money;
+        textMeshComponents[4].text = "Stamina: " + playerStats.Stamina;
 
+        stats = textMeshComponents;
+
+        
+    }
+
+    public void ActivatePanel()
+    {
+        Panel.SetActive(true);
+    }
 
     void Start()
     {
