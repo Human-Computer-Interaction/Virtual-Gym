@@ -13049,6 +13049,8 @@ MonoBehaviour:
   gravity: -9.81
   groundCheck: {fileID: 0}
   groundDistance: 0
+  Treadmill1: {fileID: 1426333501}
+  Treadmill2: {fileID: 1270173660}
 --- !u!143 &1826527122
 CharacterController:
   m_ObjectHideFlags: 0
