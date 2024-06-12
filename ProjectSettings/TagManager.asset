@@ -12,6 +12,7 @@ TagManager:
   - Abdominal
   - Athlete
   - NPC
+  - StatsValues
   layers:
   - Default
   - TransparentFX

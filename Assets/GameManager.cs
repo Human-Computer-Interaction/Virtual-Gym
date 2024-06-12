@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
@@ -180,16 +181,27 @@ public class GameManager : MonoBehaviour
     }
     public void InitStats()
     {
-        var textMeshComponents = Panel.GetComponentsInChildren<TextMeshProUGUI>();
+        // var textMeshComponents = Panel.GetComponentsInChildren<TextMeshProUGUI>();
         
-        textMeshComponents[0].text = "Weight: " + playerStats.Weight;
-        textMeshComponents[1].text = "Age: " + playerStats.Age;
-        textMeshComponents[2].text = "Height: " + playerStats.Height;
-        textMeshComponents[3].text = "Money: " + playerStats.Money;
-        textMeshComponents[4].text = "Stamina: " + playerStats.Stamina;
+        
+        // textMeshComponents[0].text = "Weight: " + playerStats.Weight;
+        // textMeshComponents[1].text = "Age: " + playerStats.Age;
+        // textMeshComponents[2].text = "Height: " + playerStats.Height;
+        // textMeshComponents[3].text = "Money: " + playerStats.Money;
+        // textMeshComponents[4].text = "Stamina: " + playerStats.Stamina;
 
-        stats = textMeshComponents;
+        // stats = textMeshComponents;
 
+        var textMeshComponents = Panel.GetComponentsInChildren<TextMeshProUGUI>();
+        textMeshComponents = textMeshComponents.Where(x => x.tag == "StatsValues").ToArray();
+        print(textMeshComponents.Length);
+        textMeshComponents[0].text = playerStats.Weight.ToString();
+        textMeshComponents[1].text = playerStats.Age.ToString();
+        textMeshComponents[2].text = playerStats.Height.ToString();
+        textMeshComponents[3].text = playerStats.Money.ToString();
+        textMeshComponents[4].text = playerStats.Stamina.ToString();
+
+        //stats = textMeshComponents;
         
     }
 
@@ -210,11 +222,12 @@ public class GameManager : MonoBehaviour
         print("BodyType: " + bodyType);
         var textMeshComponents = Panel.GetComponentsInChildren<TextMeshProUGUI>();
         print(textMeshComponents.Length);
-        textMeshComponents[0].text = "Weight: " + playerStats.Weight;
-        textMeshComponents[1].text = "Age: " + playerStats.Age;
-        textMeshComponents[2].text = "Height: " + playerStats.Height;
-        textMeshComponents[3].text = "Money: " + playerStats.Money;
-        textMeshComponents[4].text = "Stamina: " + playerStats.Stamina;
+        InitStats();
+        // textMeshComponents[0].text = "Weight: " + playerStats.Weight;
+        // textMeshComponents[1].text = "Age: " + playerStats.Age;
+        // textMeshComponents[2].text = "Height: " + playerStats.Height;
+        // textMeshComponents[3].text = "Money: " + playerStats.Money;
+        // textMeshComponents[4].text = "Stamina: " + playerStats.Stamina;
 
 
         // CalculateBMI();
