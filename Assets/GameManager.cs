@@ -155,24 +155,25 @@ public class GameManager : MonoBehaviour
     // BMI Needs Fixing!
     public float CalculateBMI(PlayerStats playerStats)
     {
-        return playerStats.Weight / (playerStats.Height * playerStats.Height);
+        BMI = playerStats.Weight / (playerStats.Height * playerStats.Height);
+        return BMI;
     }
 
-    private String BodyTypeBasedOnBmi()
+    public String BodyTypeBasedOnBmi()
     {
-        if (BMI < 18.5)
+        if (BMI < 18.5f)
         {
             return "Underweight";
         }
-        else if (BMI >= 18.5 && BMI <= 24.9)
+        else if (BMI >= 18.5f && BMI <= 24.9f)
         {
             return "Normal";
         }
-        else if (BMI >= 25 && BMI <= 29.9)
+        else if (BMI >= 25f && BMI <= 29.9f)
         {
             return "Overweight";
         }
-        else if (BMI >= 30)
+        else if (BMI >= 30f)
         {
             return "Obese";
         }
@@ -223,11 +224,6 @@ public class GameManager : MonoBehaviour
         var textMeshComponents = Panel.GetComponentsInChildren<TextMeshProUGUI>();
         print(textMeshComponents.Length);
         InitStats();
-        // textMeshComponents[0].text = "Weight: " + playerStats.Weight;
-        // textMeshComponents[1].text = "Age: " + playerStats.Age;
-        // textMeshComponents[2].text = "Height: " + playerStats.Height;
-        // textMeshComponents[3].text = "Money: " + playerStats.Money;
-        // textMeshComponents[4].text = "Stamina: " + playerStats.Stamina;
 
 
         // CalculateBMI();
