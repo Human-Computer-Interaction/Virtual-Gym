@@ -128,8 +128,13 @@ public class NPCInteraction : MonoBehaviour
                     dialogue.Add("This program will help you gain muscle , but you will have to eat More");
                     dialogue.Add("Ask The nutritionist for more info about the food");
                     dialogue.Add("Your personalized plan is ready");
-                    dialogue.Add("10' of TreadMills , 20' Bar , 10' of Squats , 10' of Leg Press,10' of dumbells");
+                    dialogue.Add("10' of TreadMills , 20' Bar , 10' of Squats , 10' of Leg Extension,10' of dumbells");
                     dialogue.Add("Good luck");
+                    gameManager.equipmentUse.TreadmillUse = 10f;
+                    gameManager.equipmentUse.BarUse = 20f;
+                    gameManager.equipmentUse.SquatUse = 10f;
+                    gameManager.equipmentUse.LegExtensionUse = 10f;
+                    gameManager.equipmentUse.DumbellsUse = 10f;
                     break;
                 }
             case "Normal":
@@ -141,6 +146,11 @@ public class NPCInteraction : MonoBehaviour
                     dialogue.Add("Your personalized plan is ready");
                     dialogue.Add("10' of TreadMills,10' Bycycle, 20' Bar , 10' of Squats , 10' of Leg Press");
                     dialogue.Add("Good luck");
+                    gameManager.equipmentUse.TreadmillUse = 10f;
+                    gameManager.equipmentUse.BikeUse = 10f;
+                    gameManager.equipmentUse.BarUse = 20f;
+                    gameManager.equipmentUse.SquatUse = 10f;
+                    gameManager.equipmentUse.LegExtensionUse = 10f;
                     break;
             }
             case "Overweight":
@@ -152,6 +162,11 @@ public class NPCInteraction : MonoBehaviour
                     dialogue.Add("Your personalized plan is ready");
                     dialogue.Add("20' of TreadMills , 20' Bycecle, 20' Bar , 10' of Squats , 10' of Leg Press");
                     dialogue.Add("Good luck");
+                    gameManager.equipmentUse.TreadmillUse = 20f;
+                    gameManager.equipmentUse.BikeUse = 20f;
+                    gameManager.equipmentUse.BarUse = 20f;
+                    gameManager.equipmentUse.SquatUse = 10f;
+                    gameManager.equipmentUse.LegExtensionUse = 10f;
                     break;
             }
             case "Obese":
@@ -163,6 +178,12 @@ public class NPCInteraction : MonoBehaviour
                     dialogue.Add("Your personalized plan is ready");
                     dialogue.Add("20' of TreadMills , 20' Bycecle, 20' Bar , 10' of Squats , 10' of Leg Press , 10 dumbells");
                     dialogue.Add("Good luck");
+                    gameManager.equipmentUse.TreadmillUse = 20f;
+                    gameManager.equipmentUse.BikeUse = 20f;
+                    gameManager.equipmentUse.BarUse = 20f;
+                    gameManager.equipmentUse.SquatUse = 10f;
+                    gameManager.equipmentUse.LegExtensionUse = 10f;
+                    gameManager.equipmentUse.DumbellsUse = 10f;
                     break;
             }
             

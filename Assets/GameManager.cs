@@ -39,6 +39,28 @@ public struct PlayerStats
     }
 
 }
+public struct EquipmentUse
+{
+    public float TreadmillUse;
+    public float BarUse;  
+    public float LegExtensionUse;
+    public float BikeUse;
+    public float DumbellsUse;
+
+    public float SquatUse;
+}
+public struct EquipmentTimers
+{
+    public float TreadmillTimer;
+    public float BarTimer;  
+    public float LegExtensionTimer;
+    public float BikeTimer;
+    public float dumbellsTimer;
+
+    public float SquatTimer;
+
+    
+}
 public class GameManager : MonoBehaviour
 {
     public static GameManager manager;
@@ -67,11 +89,15 @@ public class GameManager : MonoBehaviour
     public PlayerStats playerStats;
 
     
-    public float Timer = 0f;
+    //public float Timer = 0f;
 
     public TextMeshProUGUI [] stats;
 
     public float BMI;
+
+    public EquipmentUse equipmentUse;
+
+    public EquipmentTimers equipmentTimers;
 
 
     public void Awake()
@@ -107,37 +133,59 @@ public class GameManager : MonoBehaviour
         if (AthleteCollider != null && BarCollider != null)
             if (AthleteCollider.bounds.Intersects(BarCollider.bounds))
             {
-                Timer += Time.deltaTime;
-                print("Timer: " + Timer);
+
+                // Timer += Time.deltaTime;
+                // print("Timer: " + Timer);
+                checkExerciseComplition(ref equipmentTimers.BarTimer,equipmentUse.BarUse);
+                print("Timer: " + equipmentTimers.BarTimer);
             }
 
         if (AthleteCollider != null && LegCollider != null)
             if (AthleteCollider.bounds.Intersects(LegCollider.bounds))
             {
-                Timer += Time.deltaTime;
-                print("Timer: " + Timer);
+                checkExerciseComplition(ref equipmentTimers.LegExtensionTimer,equipmentUse.LegExtensionUse);
+                print("Timer: " + equipmentTimers.LegExtensionTimer);
+                // Timer += Time.deltaTime;
+                // print("Timer: " + Timer);
             }
         if (AthleteCollider != null && BikeCollider != null)
             if (AthleteCollider.bounds.Intersects(BikeCollider.bounds))
+            {
                 Debug.Log("Collision detected in Bike!!");
+                checkExerciseComplition(ref equipmentTimers.BikeTimer,equipmentUse.BikeUse);
+                print("Timer: " + equipmentTimers.BikeTimer);
         // if (AthleteCollider != null && Bike1Collider != null)
         //     if (AthleteCollider.bounds.Intersects(Bike1Collider.bounds))
         //         Debug.Log("Collision detected in Bike1!!");
+            }
         if (AthleteCollider != null && Treadmill1Collider != null)
             if (AthleteCollider.bounds.Intersects(Treadmill1Collider.bounds))
+            {
                 Debug.Log("Collision detected in Treadmill1!!");
+                checkExerciseComplition(ref equipmentTimers.TreadmillTimer,equipmentUse.TreadmillUse);
+                print("Timer: " + equipmentTimers.TreadmillTimer);
+            }
         if (AthleteCollider != null && Treadmill2Collider != null)
             if (AthleteCollider.bounds.Intersects(Treadmill2Collider.bounds))
+            {
                 Debug.Log("Collision detected in Treadmill2!!");
+                checkExerciseComplition(ref equipmentTimers.TreadmillTimer,equipmentUse.TreadmillUse);
+                print("Timer: " + equipmentTimers.TreadmillTimer);
+            }
         if (AthleteCollider != null && WeightScaleCollider != null)
             if (AthleteCollider.bounds.Intersects(WeightScaleCollider.bounds))
+            {
                 Debug.Log("Collision detected in WeightScale!!");
+                checkExerciseComplition(ref equipmentTimers.dumbellsTimer,equipmentUse.DumbellsUse);
+                print("Timer: " + equipmentTimers.dumbellsTimer);
+            }
         if (AthleteCollider != null && MatCollider != null)
             if (AthleteCollider.bounds.Intersects(MatCollider.bounds))
                 Debug.Log("Collision detected in Mat!!");
         if (AthleteCollider != null && Mat3Collider != null)
             if (AthleteCollider.bounds.Intersects(Mat3Collider.bounds))
                 Debug.Log("Collision detected in Mat3!!");
+                checkExerciseComplition(ref equipmentTimers.SquatTimer,equipmentUse.SquatUse);
         if (AthleteCollider != null && Mat4Collider != null)
             if (AthleteCollider.bounds.Intersects(Mat4Collider.bounds))
                 Debug.Log("Collision detected in Mat4!!");
@@ -209,6 +257,16 @@ public class GameManager : MonoBehaviour
     public void ActivatePanel()
     {
         Panel.SetActive(true);
+    }
+
+    public void checkExerciseComplition(ref float Timer,float maxTime)
+    {
+        if(Timer < maxTime)
+        {
+            Timer += Time.deltaTime;
+        }
+            
+
     }
 
     void Start()
