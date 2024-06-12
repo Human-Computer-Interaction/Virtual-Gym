@@ -128,7 +128,7 @@ public class NPCInteraction : MonoBehaviour
                     dialogue.Add("This program will help you gain muscle , but you will have to eat More");
                     dialogue.Add("Ask The nutritionist for more info about the food");
                     dialogue.Add("Your personalized plan is ready");
-                    dialogue.Add("10' of TreadMills , 20' Bar , 10' of Squats , 10' of Leg Press");
+                    dialogue.Add("10' of TreadMills , 20' Bar , 10' of Squats , 10' of Leg Press,10' of dumbells");
                     dialogue.Add("Good luck");
                     break;
                 }
@@ -139,7 +139,7 @@ public class NPCInteraction : MonoBehaviour
                     dialogue.Add("This program will help you gain muscle , but you will have to eat More");
                     dialogue.Add("Ask The nutritionist for more info about the food");
                     dialogue.Add("Your personalized plan is ready");
-                    dialogue.Add("10' of TreadMills , 20' Bar , 10' of Squats , 10' of Leg Press");
+                    dialogue.Add("10' of TreadMills,10' Bycycle, 20' Bar , 10' of Squats , 10' of Leg Press");
                     dialogue.Add("Good luck");
                     break;
             }
@@ -150,7 +150,7 @@ public class NPCInteraction : MonoBehaviour
                     dialogue.Add("This program will help you to lose weight , but you will have to eat Less");
                     dialogue.Add("Ask The nutritionist for more info about the food");
                     dialogue.Add("Your personalized plan is ready");
-                    dialogue.Add("10' of TreadMills , 20' Bar , 10' of Squats , 10' of Leg Press");
+                    dialogue.Add("20' of TreadMills , 20' Bycecle, 20' Bar , 10' of Squats , 10' of Leg Press");
                     dialogue.Add("Good luck");
                     break;
             }
@@ -161,7 +161,7 @@ public class NPCInteraction : MonoBehaviour
                     dialogue.Add("This program will help you lose weight , but you will have to eat less");
                     dialogue.Add("Ask The nutritionist for more info about the food");
                     dialogue.Add("Your personalized plan is ready");
-                    dialogue.Add("10' of TreadMills , 20' Bar , 10' of Squats , 10' of Leg Press");
+                    dialogue.Add("20' of TreadMills , 20' Bycecle, 20' Bar , 10' of Squats , 10' of Leg Press , 10 dumbells");
                     dialogue.Add("Good luck");
                     break;
             }
