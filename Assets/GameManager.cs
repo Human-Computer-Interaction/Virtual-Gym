@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 public struct PlayerStats
 {
 
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject WeightTrack;
     [SerializeField] GameObject Ball12;
     [SerializeField] GameObject Panel;
+    [SerializeField] Text ScreenTimer;
 
 
     private Collider BarCollider;
@@ -131,20 +133,27 @@ public class GameManager : MonoBehaviour
         Collider Ball12Collider = Ball12.GetComponent<Collider>();
 
         if (AthleteCollider != null && BarCollider != null)
+            
             if (AthleteCollider.bounds.Intersects(BarCollider.bounds))
             {
 
                 // Timer += Time.deltaTime;
                 // print("Timer: " + Timer);
                 checkExerciseComplition(ref equipmentTimers.BarTimer,equipmentUse.BarUse);
-                print("Timer: " + equipmentTimers.BarTimer);
+                TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.BarTimer);
+                ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
+                //print("Timer: " + equipmentTimers.BarTimer);
             }
+            
 
         if (AthleteCollider != null && LegCollider != null)
             if (AthleteCollider.bounds.Intersects(LegCollider.bounds))
             {
                 checkExerciseComplition(ref equipmentTimers.LegExtensionTimer,equipmentUse.LegExtensionUse);
-                print("Timer: " + equipmentTimers.LegExtensionTimer);
+                //print("Timer: " + equipmentTimers.LegExtensionTimer%.2f);
+                TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.LegExtensionTimer);
+                ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
+                //print("Timer: " + equipmentTimers.LegExtensionTimer);
                 // Timer += Time.deltaTime;
                 // print("Timer: " + Timer);
             }
@@ -153,31 +162,39 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("Collision detected in Bike!!");
                 checkExerciseComplition(ref equipmentTimers.BikeTimer,equipmentUse.BikeUse);
-                print("Timer: " + equipmentTimers.BikeTimer);
-        // if (AthleteCollider != null && Bike1Collider != null)
-        //     if (AthleteCollider.bounds.Intersects(Bike1Collider.bounds))
-        //         Debug.Log("Collision detected in Bike1!!");
+                //print("Timer: " + equipmentTimers.BikeTimer);
+                TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.BikeTimer);
+                ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
+                
+              
             }
+            
         if (AthleteCollider != null && Treadmill1Collider != null)
             if (AthleteCollider.bounds.Intersects(Treadmill1Collider.bounds))
             {
                 Debug.Log("Collision detected in Treadmill1!!");
                 checkExerciseComplition(ref equipmentTimers.TreadmillTimer,equipmentUse.TreadmillUse);
-                print("Timer: " + equipmentTimers.TreadmillTimer);
+                //print("Timer: " + equipmentTimers.TreadmillTimer);
+                TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.TreadmillTimer);
+                ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
             }
         if (AthleteCollider != null && Treadmill2Collider != null)
             if (AthleteCollider.bounds.Intersects(Treadmill2Collider.bounds))
             {
                 Debug.Log("Collision detected in Treadmill2!!");
                 checkExerciseComplition(ref equipmentTimers.TreadmillTimer,equipmentUse.TreadmillUse);
-                print("Timer: " + equipmentTimers.TreadmillTimer);
+                //print("Timer: " + equipmentTimers.TreadmillTimer);
+                TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.TreadmillTimer);
+                ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
             }
         if (AthleteCollider != null && WeightScaleCollider != null)
             if (AthleteCollider.bounds.Intersects(WeightScaleCollider.bounds))
             {
                 Debug.Log("Collision detected in WeightScale!!");
                 checkExerciseComplition(ref equipmentTimers.dumbellsTimer,equipmentUse.DumbellsUse);
-                print("Timer: " + equipmentTimers.dumbellsTimer);
+                //print("Timer: " + equipmentTimers.dumbellsTimer);
+                TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.dumbellsTimer);
+                ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
             }
         if (AthleteCollider != null && MatCollider != null)
             if (AthleteCollider.bounds.Intersects(MatCollider.bounds))
