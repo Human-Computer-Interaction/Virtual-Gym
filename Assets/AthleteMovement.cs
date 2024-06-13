@@ -33,6 +33,24 @@ public class AthleteMovement : MonoBehaviour
 
     [SerializeField] GameObject Treadmill1;
     [SerializeField] GameObject Treadmill2;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Treadmills"))
+        {
+            animator.SetBool("isRunning", true);
+            
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.CompareTag("Treadmills"))
+            {
+                animator.SetBool("isRunning", false);
+                
+            }
+        }
     
        void CheckCollision()
     {
@@ -46,18 +64,19 @@ public class AthleteMovement : MonoBehaviour
              AthleteCollider.bounds.Intersects(Treadmill1Collider.bounds))
             {
                 isOnTTreadmille = true;
-                animator.SetBool("isRunning", true);
-                speed = 0.000000000001f;
+                 
             }
             else
             {
                 isOnTTreadmille = false;
-                animator.SetBool("isRunning", false);
-                speed = 1f;
+                // animator.SetBool("isRunning", false);
+                // speed = 1f;
                 
             }
         }
     }
+
+
     void Start()
     {
 
@@ -65,6 +84,7 @@ public class AthleteMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         groundCheck = GameObject.Find("Ground-Check").GetComponent<Transform>();
         controller = GetComponent<CharacterController>();
+        
 
     }
     
@@ -88,17 +108,18 @@ public class AthleteMovement : MonoBehaviour
         }
         else
         {
-            animator.SetFloat("Speed", 0.5f);
+            animator.SetFloat("Speed", 1f);
         }
-        
-        move = transform.right * x + transform.forward * z;
+       
+       
+            
+            
+            move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime);
+            controller.Move(move * speed * Time.deltaTime);
 
-        velocity.y += gravity * Time.deltaTime;
-
-        controller.Move(velocity * Time.deltaTime);
-
+            
+           
     }
   
 }

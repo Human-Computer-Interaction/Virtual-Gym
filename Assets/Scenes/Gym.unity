@@ -10503,7 +10503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 27a7cb442852a03419a5a9b9297db611, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Athlete
       objectReference: {fileID: 0}
     - target: {fileID: 7882376022164389543, guid: 27a7cb442852a03419a5a9b9297db611, type: 3}
       propertyPath: m_TagString
