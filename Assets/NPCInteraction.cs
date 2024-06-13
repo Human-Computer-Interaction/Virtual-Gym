@@ -56,6 +56,7 @@ public class NPCInteraction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && playerIsClose)
         {
             playerCameraRotation.GetComponentInChildren<MouseLook>().enabled = false;
+            Cursor.lockState = CursorLockMode.Confined;
             // 88f is the y rotation of the camera, not 0 because we're rotating the camera when the game starts.
             playerCamera.transform.rotation = Quaternion.Euler(new Vector3(12f, 88f, 0f));
             if (dialoguePanel.activeInHierarchy)
@@ -80,6 +81,7 @@ public class NPCInteraction : MonoBehaviour
         index = 0;
         dialoguePanel.SetActive(false);
         playerCameraRotation.GetComponentInChildren<MouseLook>().enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     public void NextLine()
     {
@@ -95,7 +97,6 @@ public class NPCInteraction : MonoBehaviour
             dialoguePanel.SetActive(false);
             if (!hasCharacteristics)
                 characteristicsInputPanel.SetActive(true);
-            //PlayerStats playerStats = new PlayerStats(70f, 100f, 100f, 1.80f, 30);
         }
     }
     public void PassInputsToGameManager()
@@ -106,30 +107,23 @@ public class NPCInteraction : MonoBehaviour
         gameManager.playerStats.Height = Math.Abs(float.Parse(inputsFields[2].text)) / 100f;
         gameManager.InitStats();
         gameManager.ActivatePanel();
-
-
         characteristicsInputPanel.SetActive(false);
         inputsFields[0].text = "";
         inputsFields[1].text = "";
         inputsFields[2].text = "";
-
         hasCharacteristics = true;
-        // print(gameManager.playerStats);
-        // print(gameManager.CalculateBMI(gameManager.playerStats));
-
         GymPlanBasedOnBMI();
     }
 
     public void GymPlanBasedOnBMI()
     {
-        dialogue = new List<string>();
-        print("size of dialogue = " + dialogue.Count());
+        //dialogue = new List<string>();
+        dialogue.Clear();
         gameManager.CalculateBMI(gameManager.playerStats);
         String BodyType = gameManager.BodyTypeBasedOnBmi();
         print(BodyType);
         switch (BodyType)
         {
-
             case "Underweight":
                 {
 
@@ -193,12 +187,13 @@ public class NPCInteraction : MonoBehaviour
                     gameManager.equipmentUse.SquatUse = 10f;
                     gameManager.equipmentUse.LegExtensionUse = 10f;
                     gameManager.equipmentUse.DumbellsUse = 10f;
+                    gameManager.equipmentUse.MatUse = 10f;
+                    gameManager.equipmentUse.DumbellsUse = 10f;
                     break;
                 }
 
 
         }
-        print(dialogue.Count());
         dialogueText.text = dialogue[0]; // εβαλα αυτό εδώ γιατι αλλιώς για κάποιο λόγο δείχει το δεύτερο μήνυμα. Βγάλε το για να καταλάβεις
         dialoguePanel.SetActive(true);
     }
