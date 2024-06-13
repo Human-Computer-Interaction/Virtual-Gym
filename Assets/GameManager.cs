@@ -43,7 +43,7 @@ public struct PlayerStats
 public struct EquipmentUse
 {
     public float TreadmillUse;
-    public float BarUse;  
+    public float BarUse;
     public float LegExtensionUse;
     public float BikeUse;
     public float DumbellsUse;
@@ -53,14 +53,14 @@ public struct EquipmentUse
 public struct EquipmentTimers
 {
     public float TreadmillTimer;
-    public float BarTimer;  
+    public float BarTimer;
     public float LegExtensionTimer;
     public float BikeTimer;
     public float dumbellsTimer;
 
     public float SquatTimer;
 
-    
+
 }
 public class GameManager : MonoBehaviour
 {
@@ -75,9 +75,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject Treadmill1;
     [SerializeField] GameObject Treadmill2;
     [SerializeField] GameObject Mat;
-    [SerializeField] GameObject Mat3;
-    [SerializeField] GameObject Mat4;
-    [SerializeField] GameObject Mat5;
+
     [SerializeField] GameObject WeightScale;
     [SerializeField] GameObject WeightTrack;
     [SerializeField] GameObject Ball12;
@@ -90,10 +88,10 @@ public class GameManager : MonoBehaviour
     private TextMesh textMesh;
     public PlayerStats playerStats;
 
-    
+
     //public float Timer = 0f;
 
-    public TextMeshProUGUI [] stats;
+    public TextMeshProUGUI[] stats;
 
     public float BMI;
 
@@ -126,30 +124,27 @@ public class GameManager : MonoBehaviour
         Collider Treadmill2Collider = Treadmill2.GetComponent<Collider>();
         Collider WeightScaleCollider = WeightScale.GetComponent<Collider>();
         Collider MatCollider = Mat.GetComponent<Collider>();
-        Collider Mat3Collider = Mat3.GetComponent<Collider>();
-        Collider Mat4Collider = Mat4.GetComponent<Collider>();
-        Collider Mat5Collider = Mat5.GetComponent<Collider>();
         Collider WeightTrackCollider = WeightTrack.GetComponent<Collider>();
         Collider Ball12Collider = Ball12.GetComponent<Collider>();
 
         if (AthleteCollider != null && BarCollider != null)
-            
+
             if (AthleteCollider.bounds.Intersects(BarCollider.bounds))
             {
 
                 // Timer += Time.deltaTime;
                 // print("Timer: " + Timer);
-                checkExerciseComplition(ref equipmentTimers.BarTimer,equipmentUse.BarUse);
+                checkExerciseComplition(ref equipmentTimers.BarTimer, equipmentUse.BarUse);
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.BarTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
                 //print("Timer: " + equipmentTimers.BarTimer);
             }
-            
+
 
         if (AthleteCollider != null && LegCollider != null)
             if (AthleteCollider.bounds.Intersects(LegCollider.bounds))
             {
-                checkExerciseComplition(ref equipmentTimers.LegExtensionTimer,equipmentUse.LegExtensionUse);
+                checkExerciseComplition(ref equipmentTimers.LegExtensionTimer, equipmentUse.LegExtensionUse);
                 //print("Timer: " + equipmentTimers.LegExtensionTimer%.2f);
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.LegExtensionTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
@@ -161,19 +156,19 @@ public class GameManager : MonoBehaviour
             if (AthleteCollider.bounds.Intersects(BikeCollider.bounds))
             {
                 Debug.Log("Collision detected in Bike!!");
-                checkExerciseComplition(ref equipmentTimers.BikeTimer,equipmentUse.BikeUse);
+                checkExerciseComplition(ref equipmentTimers.BikeTimer, equipmentUse.BikeUse);
                 //print("Timer: " + equipmentTimers.BikeTimer);
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.BikeTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
-                
-              
+
+
             }
-            
+
         if (AthleteCollider != null && Treadmill1Collider != null)
             if (AthleteCollider.bounds.Intersects(Treadmill1Collider.bounds))
             {
                 Debug.Log("Collision detected in Treadmill1!!");
-                checkExerciseComplition(ref equipmentTimers.TreadmillTimer,equipmentUse.TreadmillUse);
+                checkExerciseComplition(ref equipmentTimers.TreadmillTimer, equipmentUse.TreadmillUse);
                 //print("Timer: " + equipmentTimers.TreadmillTimer);
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.TreadmillTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
@@ -182,7 +177,7 @@ public class GameManager : MonoBehaviour
             if (AthleteCollider.bounds.Intersects(Treadmill2Collider.bounds))
             {
                 Debug.Log("Collision detected in Treadmill2!!");
-                checkExerciseComplition(ref equipmentTimers.TreadmillTimer,equipmentUse.TreadmillUse);
+                checkExerciseComplition(ref equipmentTimers.TreadmillTimer, equipmentUse.TreadmillUse);
                 //print("Timer: " + equipmentTimers.TreadmillTimer);
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.TreadmillTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
@@ -191,30 +186,23 @@ public class GameManager : MonoBehaviour
             if (AthleteCollider.bounds.Intersects(WeightScaleCollider.bounds))
             {
                 Debug.Log("Collision detected in WeightScale!!");
-                checkExerciseComplition(ref equipmentTimers.dumbellsTimer,equipmentUse.DumbellsUse);
+                checkExerciseComplition(ref equipmentTimers.dumbellsTimer, equipmentUse.DumbellsUse);
                 //print("Timer: " + equipmentTimers.dumbellsTimer);
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.dumbellsTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
             }
         if (AthleteCollider != null && MatCollider != null)
+        {
             if (AthleteCollider.bounds.Intersects(MatCollider.bounds))
-                Debug.Log("Collision detected in Mat!!");
-        if (AthleteCollider != null && Mat3Collider != null)
-            if (AthleteCollider.bounds.Intersects(Mat3Collider.bounds))
-                Debug.Log("Collision detected in Mat3!!");
-                checkExerciseComplition(ref equipmentTimers.SquatTimer,equipmentUse.SquatUse);
-        if (AthleteCollider != null && Mat4Collider != null)
-            if (AthleteCollider.bounds.Intersects(Mat4Collider.bounds))
-                Debug.Log("Collision detected in Mat4!!");
-        if (AthleteCollider != null && Mat5Collider != null)
-            if (AthleteCollider.bounds.Intersects(Mat5Collider.bounds))
-                Debug.Log("Collision detected in Mat5!!");
-        if (AthleteCollider != null && WeightTrackCollider != null)
-            if (AthleteCollider.bounds.Intersects(WeightTrackCollider.bounds))
-                Debug.Log("Collision detected in WeightTrack!!");
-        if (AthleteCollider != null && Ball12Collider != null)
-            if (AthleteCollider.bounds.Intersects(Ball12Collider.bounds))
-                Debug.Log("Collision detected in Ball12!!");
+            {
+                print("Collision detected in Mat!!");
+            }
+
+        }
+
+
+
+
     }
 
     // BMI Needs Fixing!
@@ -248,8 +236,8 @@ public class GameManager : MonoBehaviour
     public void InitStats()
     {
         // var textMeshComponents = Panel.GetComponentsInChildren<TextMeshProUGUI>();
-        
-        
+
+
         // textMeshComponents[0].text = "Weight: " + playerStats.Weight;
         // textMeshComponents[1].text = "Age: " + playerStats.Age;
         // textMeshComponents[2].text = "Height: " + playerStats.Height;
@@ -268,7 +256,7 @@ public class GameManager : MonoBehaviour
         textMeshComponents[4].text = playerStats.Stamina.ToString();
 
         //stats = textMeshComponents;
-        
+
     }
 
     public void ActivatePanel()
@@ -276,13 +264,13 @@ public class GameManager : MonoBehaviour
         Panel.SetActive(true);
     }
 
-    public void checkExerciseComplition(ref float Timer,float maxTime)
+    public void checkExerciseComplition(ref float Timer, float maxTime)
     {
-        if(Timer < maxTime)
+        if (Timer < maxTime)
         {
             Timer += Time.deltaTime;
         }
-            
+
 
     }
 

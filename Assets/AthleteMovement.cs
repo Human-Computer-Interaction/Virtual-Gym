@@ -29,6 +29,8 @@ public class AthleteMovement : MonoBehaviour
     private Animator animator;
 
     private bool isOnTTreadmille = false;
+
+    [SerializeField] Camera camera;
     // Update is called once per frame
 
     [SerializeField] GameObject Treadmill1;
@@ -39,20 +41,64 @@ public class AthleteMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Treadmills"))
         {
             animator.SetBool("isRunning", true);
-            
+
+        }
+        else if (other.gameObject.CompareTag("Bike"))
+        {
+            animator.SetBool("isRiding", true);
+        }
+        else if (other.gameObject.CompareTag("Push-Ups"))
+        {
+            print("mphka");
+            animator.SetBool("isPushing", true);
+            print(animator.GetBool("isPushing"));
+        }
+        else if (other.gameObject.CompareTag("Bar"))
+        {
+            animator.SetBool("isSquating", true);
+        }
+        else if (other.gameObject.CompareTag("Weights"))
+        {
+            animator.SetBool("isLifting", true);
+        }
+        else if (other.gameObject.CompareTag("Leg Extension"))
+        {
+            animator.SetBool("isLegging", true);
+            camera.transform.rotation = Quaternion.Euler(new Vector3(12f, 88f, 0f));
         }
     }
 
     private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Treadmills"))
         {
-            if (other.gameObject.CompareTag("Treadmills"))
-            {
-                animator.SetBool("isRunning", false);
-                
-            }
+            animator.SetBool("isRunning", false);
+
         }
-    
-       void CheckCollision()
+        else if (other.gameObject.CompareTag("Bike"))
+        {
+            animator.SetBool("isRiding", false);
+        }
+        else if (other.gameObject.CompareTag("Push-Ups"))
+        {
+            animator.SetBool("isPushing", false);
+        }
+        else if (other.gameObject.CompareTag("Bar"))
+        {
+            animator.SetBool("isSquating", false);
+        }
+        else if (other.gameObject.CompareTag("Weights"))
+        {
+            animator.SetBool("isLifting", false);
+        }
+        else if (other.gameObject.CompareTag("Leg Extension"))
+        {
+            animator.SetBool("isLegging", false);
+        }
+
+    }
+
+    void CheckCollision()
     {
         Collider Treadmill1Collider = Treadmill1.GetComponent<Collider>();
         Collider Treadmill2Collider = Treadmill2.GetComponent<Collider>();
@@ -64,14 +110,14 @@ public class AthleteMovement : MonoBehaviour
              AthleteCollider.bounds.Intersects(Treadmill1Collider.bounds))
             {
                 isOnTTreadmille = true;
-                 
+
             }
             else
             {
                 isOnTTreadmille = false;
                 // animator.SetBool("isRunning", false);
                 // speed = 1f;
-                
+
             }
         }
     }
@@ -84,10 +130,10 @@ public class AthleteMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         groundCheck = GameObject.Find("Ground-Check").GetComponent<Transform>();
         controller = GetComponent<CharacterController>();
-        
+
 
     }
-    
+
     void Update()
     {
         CheckCollision();
@@ -110,16 +156,16 @@ public class AthleteMovement : MonoBehaviour
         {
             animator.SetFloat("Speed", 1f);
         }
-       
-       
-            
-            
-            move = transform.right * x + transform.forward * z;
 
-            controller.Move(move * speed * Time.deltaTime);
 
-            
-           
+
+
+        move = transform.right * x + transform.forward * z;
+
+        controller.Move(move * speed * Time.deltaTime);
+
+
+
     }
-  
+
 }

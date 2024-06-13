@@ -13,6 +13,8 @@ TagManager:
   - Athlete
   - NPC
   - StatsValues
+  - Push-Ups
+  - Weights
   layers:
   - Default
   - TransparentFX
