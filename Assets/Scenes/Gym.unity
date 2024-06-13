@@ -7720,6 +7720,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 27a7cb442852a03419a5a9b9297db611, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1762597902}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 27a7cb442852a03419a5a9b9297db611, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1762597904}
   m_SourcePrefab: {fileID: 100100000, guid: 27a7cb442852a03419a5a9b9297db611, type: 3}
 --- !u!1 &1349590316
 GameObject:
@@ -10379,12 +10382,9 @@ MonoBehaviour:
   Treadmill1: {fileID: 1426333501}
   Treadmill2: {fileID: 1270173660}
   Mat: {fileID: 191174830}
-  WeightScale: {fileID: 486725668}
-  WeightTrack: {fileID: 1771215622}
-  Ball12: {fileID: 1219007844}
-  Panel: {fileID: 1737874396}
+  Dumbells: {fileID: 1771215622}
+  PlayerStatsPanel: {fileID: 1737874396}
   ScreenTimer: {fileID: 1558249746}
-  stats: []
   BMI: 0
 --- !u!4 &1500633544
 Transform:
@@ -12607,6 +12607,27 @@ MonoBehaviour:
   gameManagerComponent: {fileID: 1500633542}
   wordSpeed: 0.01
   playerIsClose: 0
+--- !u!65 &1762597904
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762597894}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 1.6, z: 0.5}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &1771215622 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1098025871564101011, guid: 9c5cf343a5eede64a863ebca588066cf, type: 3}
