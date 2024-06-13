@@ -36,64 +36,84 @@ public class AthleteMovement : MonoBehaviour
     [SerializeField] GameObject Treadmill1;
     [SerializeField] GameObject Treadmill2;
 
+    private GameObject playerCameraRotation;
+    private GameObject playerCamera;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Treadmills"))
+        if (other.gameObject.CompareTag("Treadmills") | other.gameObject.CompareTag("Bike") | other.gameObject.CompareTag("Push-Ups")
+            | other.gameObject.CompareTag("Bar") | other.gameObject.CompareTag("Weights") | other.gameObject.CompareTag("Leg Extension"))
         {
-            animator.SetBool("isRunning", true);
+            Vector3 desiredPosition = new Vector3(camera.transform.position.x, camera.transform.position.y, camera.transform.position.z);
+            playerCameraRotation.GetComponentInChildren<MouseLook>().enabled = false;
+            camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y + 1f, camera.transform.position.z);
+            Debug.Log("Initial Rotation: " + camera.transform.rotation.eulerAngles);
+            camera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+            Debug.Log("New Rotation: " + camera.transform.rotation.eulerAngles);
 
-        }
-        else if (other.gameObject.CompareTag("Bike"))
-        {
-            animator.SetBool("isRiding", true);
-        }
-        else if (other.gameObject.CompareTag("Push-Ups"))
-        {
-            print("mphka");
-            animator.SetBool("isPushing", true);
-            print(animator.GetBool("isPushing"));
-        }
-        else if (other.gameObject.CompareTag("Bar"))
-        {
-            animator.SetBool("isSquating", true);
-        }
-        else if (other.gameObject.CompareTag("Weights"))
-        {
-            animator.SetBool("isLifting", true);
-        }
-        else if (other.gameObject.CompareTag("Leg Extension"))
-        {
-            animator.SetBool("isLegging", true);
-            camera.transform.rotation = Quaternion.Euler(new Vector3(12f, 88f, 0f));
+            if (other.gameObject.CompareTag("Treadmills"))
+            {
+                animator.SetBool("isRunning", true);
+
+            }
+            else if (other.gameObject.CompareTag("Bike"))
+            {
+                animator.SetBool("isRiding", true);
+            }
+            else if (other.gameObject.CompareTag("Push-Ups"))
+            {
+                print("mphka");
+                animator.SetBool("isPushing", true);
+                print(animator.GetBool("isPushing"));
+            }
+            else if (other.gameObject.CompareTag("Bar"))
+            {
+                animator.SetBool("isSquating", true);
+            }
+            else if (other.gameObject.CompareTag("Weights"))
+            {
+                animator.SetBool("isLifting", true);
+            }
+            else if (other.gameObject.CompareTag("Leg Extension"))
+            {
+                animator.SetBool("isLegging", true);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Treadmills"))
+        if (other.gameObject.CompareTag("Treadmills") | other.gameObject.CompareTag("Bike") | other.gameObject.CompareTag("Push-Ups")
+        | other.gameObject.CompareTag("Bar") | other.gameObject.CompareTag("Weights") | other.gameObject.CompareTag("Leg Extension"))
         {
-            animator.SetBool("isRunning", false);
+            playerCameraRotation.GetComponentInChildren<MouseLook>().enabled = true;
+            camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y - 1f, camera.transform.position.z);
+            camera.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+            if (other.gameObject.CompareTag("Treadmills"))
+            {
+                animator.SetBool("isRunning", false);
 
-        }
-        else if (other.gameObject.CompareTag("Bike"))
-        {
-            animator.SetBool("isRiding", false);
-        }
-        else if (other.gameObject.CompareTag("Push-Ups"))
-        {
-            animator.SetBool("isPushing", false);
-        }
-        else if (other.gameObject.CompareTag("Bar"))
-        {
-            animator.SetBool("isSquating", false);
-        }
-        else if (other.gameObject.CompareTag("Weights"))
-        {
-            animator.SetBool("isLifting", false);
-        }
-        else if (other.gameObject.CompareTag("Leg Extension"))
-        {
-            animator.SetBool("isLegging", false);
+            }
+            else if (other.gameObject.CompareTag("Bike"))
+            {
+                animator.SetBool("isRiding", false);
+            }
+            else if (other.gameObject.CompareTag("Push-Ups"))
+            {
+                animator.SetBool("isPushing", false);
+            }
+            else if (other.gameObject.CompareTag("Bar"))
+            {
+                animator.SetBool("isSquating", false);
+            }
+            else if (other.gameObject.CompareTag("Weights"))
+            {
+                animator.SetBool("isLifting", false);
+            }
+            else if (other.gameObject.CompareTag("Leg Extension"))
+            {
+                animator.SetBool("isLegging", false);
+            }
         }
 
     }
@@ -130,6 +150,8 @@ public class AthleteMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         groundCheck = GameObject.Find("Ground-Check").GetComponent<Transform>();
         controller = GetComponent<CharacterController>();
+        playerCameraRotation = GameObject.Find("Athlete");
+        playerCamera = GameObject.Find("Camera");
 
 
     }
