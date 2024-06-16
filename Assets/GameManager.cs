@@ -33,15 +33,26 @@ public struct PlayerStats
     }
 
 }
-public struct EquipmentUse
+public class EquipmentUse
 {
     public float TreadmillUse;
     public float BarUse;
     public float LegExtensionUse;
     public float BikeUse;
     public float DumbellsUse;
-    public float SquatUse;
+
     public float MatUse;
+
+    public EquipmentUse()
+    {
+        this.TreadmillUse = -1;
+        this.BarUse = -1;
+        this.LegExtensionUse = -1;
+        this.BikeUse = -1;
+        this.DumbellsUse = -1;
+
+        this.MatUse = -1;
+    }
 }
 public struct EquipmentTimers
 {
@@ -50,9 +61,12 @@ public struct EquipmentTimers
     public float LegExtensionTimer;
     public float BikeTimer;
     public float DumbellsTimer;
-    public float SquatTimer;
+
     public float MatTimer;
 }
+
+
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager manager;
@@ -203,6 +217,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool exerciseComplited(ref float Timer, float maxTime)
+    {
+        if (Timer >= maxTime)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
     void Start()
     {
         playerStats = new PlayerStats();
@@ -216,6 +240,7 @@ public class GameManager : MonoBehaviour
         // var textMeshComponents = Panel.GetComponentsInChildren<TextMeshProUGUI>(); why?
         InitStats();
         // CalculateBMI();
+        equipmentUse = new EquipmentUse();
     }
 
 

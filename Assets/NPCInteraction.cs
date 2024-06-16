@@ -24,6 +24,7 @@ public class NPCInteraction : MonoBehaviour
     public float wordSpeed;
     public bool playerIsClose;
     private bool hasCharacteristics = false;
+    private bool hasCompleted = false;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Athlete"))
@@ -73,7 +74,37 @@ public class NPCInteraction : MonoBehaviour
         {
             continueButton.SetActive(true);
         }
-       
+
+        if (hasCompleted == false)
+        {
+            if (gameManager.equipmentUse.MatUse != -1 &&
+                gameManager.equipmentUse.DumbellsUse != -1 &&
+                gameManager.equipmentUse.BarUse != -1 &&
+
+                gameManager.equipmentUse.LegExtensionUse != -1 &&
+                gameManager.equipmentUse.TreadmillUse != -1 &&
+                gameManager.equipmentUse.BikeUse != -1)
+            {
+                if (gameManager.exerciseComplited(ref gameManager.equipmentTimers.MatTimer, gameManager.equipmentUse.MatUse) &&
+                    gameManager.exerciseComplited(ref gameManager.equipmentTimers.DumbellsTimer, gameManager.equipmentUse.DumbellsUse) &&
+                    gameManager.exerciseComplited(ref gameManager.equipmentTimers.BarTimer, gameManager.equipmentUse.BarUse) &&
+
+                    gameManager.exerciseComplited(ref gameManager.equipmentTimers.LegExtensionTimer, gameManager.equipmentUse.LegExtensionUse) &&
+                    gameManager.exerciseComplited(ref gameManager.equipmentTimers.TreadmillTimer, gameManager.equipmentUse.TreadmillUse) &&
+                    gameManager.exerciseComplited(ref gameManager.equipmentTimers.BikeTimer, gameManager.equipmentUse.BikeUse))
+                {
+                    dialogue = new List<string>
+                {
+                    "You have finished your exercise. Good Job!",
+                    "Now you have to eat some food. Ask the nutritionist for more info about the food.",
+                    "Good luck!",
+                };
+                    //dialogueText.text = dialogue[0];
+                    hasCompleted = true; // εβαλα αυτό εδώ γιατι αλλιώς για κάποιο λόγο δείχει το δεύτερο μήνυμα. Βγάλε το για να καταλάβεις
+                    //dialoguePanel.SetActive(true);
+                }
+            }
+        }
     }
     public void ZeroText()
     {
@@ -135,9 +166,11 @@ public class NPCInteraction : MonoBehaviour
                     dialogue.Add("Good luck");
                     gameManager.equipmentUse.TreadmillUse = 10f;
                     gameManager.equipmentUse.BarUse = 20f;
-                    gameManager.equipmentUse.SquatUse = 10f;
+
                     gameManager.equipmentUse.LegExtensionUse = 10f;
                     gameManager.equipmentUse.DumbellsUse = 10f;
+                    gameManager.equipmentUse.BikeUse = 0f;
+                    gameManager.equipmentUse.MatUse = 0f;
                     break;
                 }
             case "Normal":
@@ -152,8 +185,10 @@ public class NPCInteraction : MonoBehaviour
                     gameManager.equipmentUse.TreadmillUse = 10f;
                     gameManager.equipmentUse.BikeUse = 10f;
                     gameManager.equipmentUse.BarUse = 20f;
-                    gameManager.equipmentUse.SquatUse = 10f;
+
                     gameManager.equipmentUse.LegExtensionUse = 10f;
+                    gameManager.equipmentUse.DumbellsUse = 0f;
+                    gameManager.equipmentUse.MatUse = 0f;
                     break;
                 }
             case "Overweight":
@@ -168,8 +203,10 @@ public class NPCInteraction : MonoBehaviour
                     gameManager.equipmentUse.TreadmillUse = 20f;
                     gameManager.equipmentUse.BikeUse = 20f;
                     gameManager.equipmentUse.BarUse = 20f;
-                    gameManager.equipmentUse.SquatUse = 10f;
+
                     gameManager.equipmentUse.LegExtensionUse = 10f;
+                    gameManager.equipmentUse.DumbellsUse = 0f;
+                    gameManager.equipmentUse.MatUse = 0f;
                     break;
                 }
             case "Obese":
@@ -184,11 +221,11 @@ public class NPCInteraction : MonoBehaviour
                     gameManager.equipmentUse.TreadmillUse = 20f;
                     gameManager.equipmentUse.BikeUse = 20f;
                     gameManager.equipmentUse.BarUse = 20f;
-                    gameManager.equipmentUse.SquatUse = 10f;
+
                     gameManager.equipmentUse.LegExtensionUse = 10f;
                     gameManager.equipmentUse.DumbellsUse = 10f;
                     gameManager.equipmentUse.MatUse = 10f;
-                    gameManager.equipmentUse.DumbellsUse = 10f;
+
                     break;
                 }
 
