@@ -15,6 +15,7 @@ TagManager:
   - StatsValues
   - Push-Ups
   - Weights
+  - Vending_Machine
   layers:
   - Default
   - TransparentFX
