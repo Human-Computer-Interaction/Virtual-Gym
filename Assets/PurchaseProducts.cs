@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PurchaseProducts : MonoBehaviour
 {
@@ -58,6 +59,13 @@ public class PurchaseProducts : MonoBehaviour
                 purchasePanel.SetActive(false);
                 playerCameraRotation.GetComponentInChildren<MouseLook>().enabled = true;
                 Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                purchasePanel.SetActive(true);
+                nameProductsText.GetComponent<Text>().text = eshopText;
+                priceProductsText.GetComponent<Text>().text = "Price: 1000";
+                numberProductsText.GetComponent<Text>().text = "Number: 0";
             }
         }
     }
