@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject Treadmill2;
     [SerializeField] GameObject Mat;
     [SerializeField] GameObject Dumbells;
+    [SerializeField] GameObject VendingMachine;
     [SerializeField] GameObject PlayerStatsPanel;
     [SerializeField] Text ScreenTimer;
 
@@ -112,6 +113,7 @@ public class GameManager : MonoBehaviour
         Collider Treadmill2Collider = Treadmill2.GetComponent<Collider>();
         Collider MatCollider = Mat.GetComponent<Collider>();
         Collider DumbellsCollider = Dumbells.GetComponent<Collider>();
+        Collider VendingMachineCollider = VendingMachine.GetComponent<Collider>();
 
         if (AthleteCollider != null && BarCollider != null)
             if (AthleteCollider.bounds.Intersects(BarCollider.bounds))
@@ -164,6 +166,13 @@ public class GameManager : MonoBehaviour
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.DumbellsTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
             }
+        if (AthleteCollider != null && VendingMachineCollider != null)
+        {
+            if (AthleteCollider.bounds.Intersects(VendingMachineCollider.bounds))
+            {
+                // Open Vending Machine 
+            }
+        }
 
     }
 
