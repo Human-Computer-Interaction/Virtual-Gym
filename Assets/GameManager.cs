@@ -91,7 +91,6 @@ public class GameManager : MonoBehaviour
     public EquipmentUse equipmentUse;
     public EquipmentTimers equipmentTimers;
 
-    PurchaseGymProducts purchaseGymProducts = new PurchaseGymProducts();
 
     public void Awake()
     {
