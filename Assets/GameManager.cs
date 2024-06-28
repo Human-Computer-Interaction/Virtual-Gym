@@ -66,7 +66,6 @@ public struct EquipmentTimers
 }
 
 
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager manager;
@@ -90,6 +89,8 @@ public class GameManager : MonoBehaviour
 
     public EquipmentUse equipmentUse;
     public EquipmentTimers equipmentTimers;
+
+
 
 
     public void Awake()
@@ -255,6 +256,8 @@ public class GameManager : MonoBehaviour
         InitStats();
         // CalculateBMI();
         equipmentUse = new EquipmentUse();
+
+
     }
 
 

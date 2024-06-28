@@ -4,31 +4,30 @@ using UnityEngine;
 
 public class PurchaseGymProducts : MonoBehaviour
 {
-    public List<GymProduct> gymProducts;
+    [SerializeField]
+    public GameObject gameManagerComponent;
 
     [SerializeField]
     public GameObject productsPanel;
 
     private float totalPrice = 0f;
-    private GymProduct selectedProduct;
 
-    public struct GymProduct
-    {
-        public string productName;
-        public float price;
-        public float buff;
-    }
+
+    public bool playerIsClose;
+
+    private GameManager gameManager;
+
     private GameObject playerCameraRotation;
     void Start()
     {
         playerCameraRotation = GameObject.Find("Athlete");
-        gymProducts = new List<GymProduct>();
+        gameManager = gameManagerComponent.GetComponent<GameManager>();
         // ���������� ������������� ���������
-        gymProducts.Add(new GymProduct { productName = "Energy Drink", price = 5f, buff = 10 });
-        gymProducts.Add(new GymProduct { productName = "Protein", price = 20f, buff = 15 });
-        gymProducts.Add(new GymProduct { productName = "Creatinine", price = 30f, buff = 10 });
-        gymProducts.Add(new GymProduct { productName = "Gym Gloves", price = 10f, buff = 5 });
-        gymProducts.Add(new GymProduct { productName = "Dipping Belt", price = 25f, buff = 20 });
+        // gymProducts.Add(new GymProduct { productName = "Energy Drink", price = 5f, buff = 10 });
+        // gymProducts.Add(new GymProduct { productName = "Protein", price = 20f, buff = 15 });
+        // gymProducts.Add(new GymProduct { productName = "Creatinine", price = 30f, buff = 10 });
+        // gymProducts.Add(new GymProduct { productName = "Gym Gloves", price = 10f, buff = 5 });
+        // gymProducts.Add(new GymProduct { productName = "Dipping Belt", price = 25f, buff = 20 });
 
         // �������� ��� ���������
         //DisplayProducts();
@@ -69,11 +68,72 @@ public class PurchaseGymProducts : MonoBehaviour
         // }
     }
 
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Athlete"))
+        {
+            playerIsClose = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Athlete"))
+        {
+            playerIsClose = false;
+            productsPanel.SetActive(false);
+            playerCameraRotation.GetComponentInChildren<MouseLook>().enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            //print("VLAKAS");
+        }
+    }
+
+    public void BuyEnergyDrink()
+    {
+        if (gameManager.playerStats.Money >= 5f)
+        {
+            gameManager.playerStats.Money -= 5f;
+            gameManager.playerStats.Stamina += 10f;
+            gameManager.InitStats();
+        }
+
+    }
+
+    public void BuyEnergyProtein()
+    {
+        if (gameManager.playerStats.Money >= 20f)
+        {
+            gameManager.playerStats.Money -= 20f;
+            gameManager.playerStats.Weight += 0.1f;
+            gameManager.playerStats.Stamina += 15f;
+            gameManager.InitStats();
+        }
+
+
+    }
+
+    public void BuyCreatine()
+    {
+        if (gameManager.playerStats.Money >= 30f)
+        {
+            gameManager.playerStats.Money -= 30f;
+            gameManager.playerStats.Weight += 0.1f;
+            gameManager.playerStats.Stamina += 10f;
+            gameManager.InitStats();
+        }
+
+    }
+
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && playerIsClose)
         {
             DisplayProducts();
         }
     }
+
+
+
+
 }
