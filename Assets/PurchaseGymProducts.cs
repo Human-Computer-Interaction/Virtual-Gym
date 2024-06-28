@@ -15,7 +15,9 @@ public class PurchaseGymProducts : MonoBehaviour
 
     public List<GymProduct> gymProducts = new List<GymProduct>();
     public GameObject productButtonPrefab;
-    public Transform productsPanel;
+
+    [SerializeField]
+    public GameObject productsPanel;
     public Text selectedProductText;
     public Text totalPriceText;
 
@@ -24,25 +26,26 @@ public class PurchaseGymProducts : MonoBehaviour
 
     void Start()
     {
-        // Δημιουργία παραδειγμάτων προϊόντων
+        // οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½
         gymProducts.Add(new GymProduct { productName = "Energy Drink", price = 5f, buff = "+10% Energy" });
         gymProducts.Add(new GymProduct { productName = "Protein", price = 20f, buff = "+15% Strength" });
         gymProducts.Add(new GymProduct { productName = "Creatinine", price = 30f, buff = "+10% Stamina" });
         gymProducts.Add(new GymProduct { productName = "Gym Gloves", price = 10f, buff = "+5% Grip" });
         gymProducts.Add(new GymProduct { productName = "Dipping Belt", price = 25f, buff = "+20% Stability" });
 
-        // Εμφάνιση των προϊόντων
-        DisplayProducts();
+        // οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½ οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½
+        //DisplayProducts();
     }
 
-    void DisplayProducts()
+    public void DisplayProducts()
     {
-        foreach (GymProduct product in gymProducts)
-        {
-            GameObject button = Instantiate(productButtonPrefab, productsPanel);
-            button.GetComponentInChildren<Text>().text = $"{product.productName} - ${product.price} ({product.buff})";
-            button.GetComponent<Button>().onClick.AddListener(() => SelectProduct(product));
-        }
+        productsPanel.SetActive(true);
+        // foreach (GymProduct product in gymProducts)
+        // {
+        //     GameObject button = Instantiate(productButtonPrefab, productsPanel);
+        //     button.GetComponentInChildren<Text>().text = $"{product.productName} - ${product.price} ({product.buff})";
+        //     button.GetComponent<Button>().onClick.AddListener(() => SelectProduct(product));
+        // }
     }
 
     void SelectProduct(GymProduct product)
@@ -59,6 +62,14 @@ public class PurchaseGymProducts : MonoBehaviour
             totalPriceText.text = $"Total: ${totalPrice}";
             selectedProductText.text = "Selected: None";
             selectedProduct = null;
+        }
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            DisplayProducts();
         }
     }
 }
