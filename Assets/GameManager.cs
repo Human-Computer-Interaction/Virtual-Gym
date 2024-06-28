@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
@@ -50,7 +51,6 @@ public class EquipmentUse
         this.LegExtensionUse = -1;
         this.BikeUse = -1;
         this.DumbellsUse = -1;
-
         this.MatUse = -1;
     }
 }
@@ -64,7 +64,6 @@ public struct EquipmentTimers
 
     public float MatTimer;
 }
-
 
 public class GameManager : MonoBehaviour
 {
@@ -90,7 +89,7 @@ public class GameManager : MonoBehaviour
     public EquipmentUse equipmentUse;
     public EquipmentTimers equipmentTimers;
 
-
+    public float GeneralTimer;
 
 
     public void Awake()
@@ -116,12 +115,11 @@ public class GameManager : MonoBehaviour
         Collider Treadmill2Collider = Treadmill2.GetComponent<Collider>();
         Collider MatCollider = Mat.GetComponent<Collider>();
         Collider DumbellsCollider = Dumbells.GetComponent<Collider>();
-        Collider VendingMachineCollider = VendingMachine.GetComponent<Collider>();
-
 
         if (AthleteCollider != null && BarCollider != null)
             if (AthleteCollider.bounds.Intersects(BarCollider.bounds))
             {
+                updateGeneralTimer(ref GeneralTimer);
                 checkExerciseComplition(ref equipmentTimers.BarTimer, equipmentUse.BarUse);
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.BarTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
@@ -129,6 +127,7 @@ public class GameManager : MonoBehaviour
         if (AthleteCollider != null && LegCollider != null)
             if (AthleteCollider.bounds.Intersects(LegCollider.bounds))
             {
+                updateGeneralTimer(ref GeneralTimer);
                 checkExerciseComplition(ref equipmentTimers.LegExtensionTimer, equipmentUse.LegExtensionUse);
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.LegExtensionTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
@@ -136,6 +135,7 @@ public class GameManager : MonoBehaviour
         if (AthleteCollider != null && BikeCollider != null)
             if (AthleteCollider.bounds.Intersects(BikeCollider.bounds))
             {
+                updateGeneralTimer(ref GeneralTimer);
                 checkExerciseComplition(ref equipmentTimers.BikeTimer, equipmentUse.BikeUse);
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.BikeTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
@@ -143,6 +143,7 @@ public class GameManager : MonoBehaviour
         if (AthleteCollider != null && Treadmill1Collider != null)
             if (AthleteCollider.bounds.Intersects(Treadmill1Collider.bounds))
             {
+                updateGeneralTimer(ref GeneralTimer);
                 checkExerciseComplition(ref equipmentTimers.TreadmillTimer, equipmentUse.TreadmillUse);
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.TreadmillTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
@@ -150,6 +151,7 @@ public class GameManager : MonoBehaviour
         if (AthleteCollider != null && Treadmill2Collider != null)
             if (AthleteCollider.bounds.Intersects(Treadmill2Collider.bounds))
             {
+                updateGeneralTimer(ref GeneralTimer);
                 checkExerciseComplition(ref equipmentTimers.TreadmillTimer, equipmentUse.TreadmillUse);
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.TreadmillTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
@@ -158,6 +160,7 @@ public class GameManager : MonoBehaviour
         {
             if (AthleteCollider.bounds.Intersects(MatCollider.bounds))
             {
+                updateGeneralTimer(ref GeneralTimer);
                 checkExerciseComplition(ref equipmentTimers.MatTimer, equipmentUse.MatUse);
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.MatTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
@@ -166,30 +169,19 @@ public class GameManager : MonoBehaviour
         if (AthleteCollider != null && DumbellsCollider != null)
             if (AthleteCollider.bounds.Intersects(DumbellsCollider.bounds))
             {
+                updateGeneralTimer(ref GeneralTimer);
                 checkExerciseComplition(ref equipmentTimers.DumbellsTimer, equipmentUse.DumbellsUse);
                 TimeSpan timeSpan = TimeSpan.FromSeconds(equipmentTimers.DumbellsTimer);
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
             }
-
-        // if (AthleteCollider != null && VendingMachineCollider != null)
-        // {
-        //     if (AthleteCollider.bounds.Intersects(VendingMachineCollider.bounds))
-        //     {
-        //         purchaseGymProducts.DisplayProducts();
-        //         print("1");
-        //     }
-        // }
-
     }
-
-    // BMI Needs Fixing!
     public float CalculateBMI(PlayerStats playerStats)
     {
         BMI = playerStats.Weight / (playerStats.Height * playerStats.Height);
         return BMI;
     }
 
-    public String BodyTypeBasedOnBmi()
+    public string BodyTypeBasedOnBmi()
     {
         if (BMI < 18.5f)
         {
@@ -231,6 +223,17 @@ public class GameManager : MonoBehaviour
             Timer += Time.deltaTime;
         }
     }
+    public void updateGeneralTimer(ref float Timer)
+    {
+        Timer += Time.deltaTime;
+        int generalTimerToInt = (int)Timer;
+        if (generalTimerToInt / 10 > 0)
+        {
+            playerStats.Money += 1;
+            InitStats();
+            Timer = 0;
+        }
+    }
 
     public bool exerciseComplited(ref float Timer, float maxTime)
     {
@@ -244,17 +247,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        playerStats = new PlayerStats();
-        // Money and Stamina should be RNG
-        playerStats.Money = 100f;
-        playerStats.Stamina = 100f;
+        var rand = new System.Random();
+        playerStats = new PlayerStats
+        {
+            Money = rand.Next(1, 20),
+            Stamina = rand.Next(30, 70)
+        };
+        GeneralTimer = 0;
         BMI = CalculateBMI(playerStats);
         print("BMI " + BMI);
-        String bodyType = BodyTypeBasedOnBmi();
+        string bodyType = BodyTypeBasedOnBmi();
         print("BodyType: " + bodyType);
-        // var textMeshComponents = Panel.GetComponentsInChildren<TextMeshProUGUI>(); why?
         InitStats();
-        // CalculateBMI();
         equipmentUse = new EquipmentUse();
 
 

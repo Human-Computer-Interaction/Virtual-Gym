@@ -14,8 +14,7 @@ public class AthleteMovement : MonoBehaviour
 
     [SerializeField]
     private float speed = 1f;
-    [SerializeField]
-    private float gravity = -9.81f;
+
     [SerializeField]
     private Transform groundCheck;
     [SerializeField]
@@ -25,26 +24,20 @@ public class AthleteMovement : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
 
-    // Get Animator component
     private Animator animator;
 
-    private bool isOnTTreadmille = false;
-
-    [SerializeField] Camera camera;
-    // Update is called once per frame
+    [SerializeField] new Camera camera;
 
     [SerializeField] GameObject Treadmill1;
     [SerializeField] GameObject Treadmill2;
 
     private GameObject playerCameraRotation;
-    private GameObject playerCamera;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Treadmills") | other.gameObject.CompareTag("Bike") | other.gameObject.CompareTag("Push-Ups")
             | other.gameObject.CompareTag("Bar") | other.gameObject.CompareTag("Weights") | other.gameObject.CompareTag("Leg Extension"))
         {
-            Vector3 desiredPosition = new Vector3(camera.transform.position.x, camera.transform.position.y, camera.transform.position.z);
             playerCameraRotation.GetComponentInChildren<MouseLook>().enabled = false;
             camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y + 1f, camera.transform.position.z);
             Debug.Log("Initial Rotation: " + camera.transform.rotation.eulerAngles);
@@ -62,7 +55,6 @@ public class AthleteMovement : MonoBehaviour
             }
             else if (other.gameObject.CompareTag("Push-Ups"))
             {
-                print("mphka");
                 animator.SetBool("isPushing", true);
                 print(animator.GetBool("isPushing"));
             }
@@ -118,47 +110,19 @@ public class AthleteMovement : MonoBehaviour
 
     }
 
-    void CheckCollision()
-    {
-        Collider Treadmill1Collider = Treadmill1.GetComponent<Collider>();
-        Collider Treadmill2Collider = Treadmill2.GetComponent<Collider>();
-
-        Collider AthleteCollider = GetComponent<Collider>();
-        if (Treadmill1Collider != null && Treadmill2Collider != null)
-        {
-            if (AthleteCollider.bounds.Intersects(Treadmill2Collider.bounds) ||
-             AthleteCollider.bounds.Intersects(Treadmill1Collider.bounds))
-            {
-                isOnTTreadmille = true;
-
-            }
-            else
-            {
-                isOnTTreadmille = false;
-                // animator.SetBool("isRunning", false);
-                // speed = 1f;
-
-            }
-        }
-    }
-
 
     void Start()
     {
 
-        // Get the Animator component
         animator = GetComponentInChildren<Animator>();
         groundCheck = GameObject.Find("Ground-Check").GetComponent<Transform>();
         controller = GetComponent<CharacterController>();
         playerCameraRotation = GameObject.Find("Athlete");
-        playerCamera = GameObject.Find("Camera");
-
 
     }
 
     void Update()
     {
-        CheckCollision();
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -179,14 +143,9 @@ public class AthleteMovement : MonoBehaviour
             animator.SetFloat("Speed", 1f);
         }
 
-
-
-
         move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime);
-
-
+        controller.Move(speed * Time.deltaTime * move);
 
     }
 

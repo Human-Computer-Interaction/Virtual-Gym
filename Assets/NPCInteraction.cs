@@ -99,9 +99,8 @@ public class NPCInteraction : MonoBehaviour
                     "Now you have to eat some food. Ask the nutritionist for more info about the food.",
                     "Good luck!",
                 };
-                    //dialogueText.text = dialogue[0];
-                    hasCompleted = true; // εβαλα αυτό εδώ γιατι αλλιώς για κάποιο λόγο δείχει το δεύτερο μήνυμα. Βγάλε το για να καταλάβεις
-                    //dialoguePanel.SetActive(true);
+                    hasCompleted = true;
+
                 }
             }
         }
