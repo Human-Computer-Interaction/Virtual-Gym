@@ -224,7 +224,7 @@ public class NPCInteraction : MonoBehaviour
 
 
         }
-        dialogueText.text = dialogue[0]; 
+        dialogueText.text = dialogue[0];
         dialoguePanel.SetActive(true);
     }
 
