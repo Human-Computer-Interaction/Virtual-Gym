@@ -7,9 +7,10 @@ using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public struct PlayerStats
+public class PlayerStats
 {
 
+    public Dictionary<string, int> Invetory;
     public float Weight;
     public float Stamina;
     public float Money;
@@ -27,6 +28,17 @@ public struct PlayerStats
         this.Money = money;
         this.Height = height;
         this.Age = age;
+        Invetory = new Dictionary<string, int>();
+    }
+    public PlayerStats()
+    {
+        Invetory = new Dictionary<string, int>();
+    }
+    public PlayerStats(int money, int stamina)
+    {
+        this.Money = money;
+        this.Stamina = stamina;
+        Invetory = new Dictionary<string, int>();
     }
     public override string ToString()
     {
@@ -79,7 +91,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject Dumbells;
     [SerializeField] GameObject PlayerStatsPanel;
     [SerializeField] Text ScreenTimer;
-
     [SerializeField] GameObject VendingMachine;
 
     public PlayerStats playerStats;
@@ -92,6 +103,12 @@ public class GameManager : MonoBehaviour
     public float GeneralTimer;
 
     [SerializeField] GameObject helpPanel;
+    [SerializeField] GameObject inventoryPanel;
+    [SerializeField] TMP_Text energyDrinksValue;
+    [SerializeField] TMP_Text proteinsValue;
+    [SerializeField] TMP_Text creatininesValue;
+    [SerializeField] TMP_Text glovesValue;
+    [SerializeField] TMP_Text beltsValue;
 
     public void Awake()
     {
@@ -254,6 +271,11 @@ public class GameManager : MonoBehaviour
             Money = rand.Next(1, 20),
             Stamina = rand.Next(30, 70)
         };
+        playerStats.Invetory.Add("EnergyDrink", 0);
+        playerStats.Invetory.Add("Protein", 0);
+        playerStats.Invetory.Add("Creatinine", 0);
+        playerStats.Invetory.Add("Gloves", 0);
+        playerStats.Invetory.Add("Belt", 0);
         GeneralTimer = 0;
         BMI = CalculateBMI(playerStats);
         print("BMI " + BMI);
@@ -261,21 +283,36 @@ public class GameManager : MonoBehaviour
         print("BodyType: " + bodyType);
         InitStats();
         equipmentUse = new EquipmentUse();
-
-
     }
 
-    public void helpPanelActivate()
+    public void HelpPanelActivate()
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
             helpPanel.SetActive(!helpPanel.activeSelf);
         }
     }
+    public void InventoryPanelActivate()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            UpdateInventoryValues();
+            inventoryPanel.SetActive(!inventoryPanel.activeSelf);
+        }
+    }
+    public void UpdateInventoryValues()
+    {
+        energyDrinksValue.text = playerStats.Invetory["EnergyDrink"].ToString();
+        proteinsValue.text = playerStats.Invetory["Protein"].ToString();
+        creatininesValue.text = playerStats.Invetory["Creatinine"].ToString();
+        glovesValue.text = playerStats.Invetory["Gloves"].ToString();
+        beltsValue.text = playerStats.Invetory["Belt"].ToString();
+    }
 
     void Update()
     {
         CheckCollision();
-        helpPanelActivate();
+        HelpPanelActivate();
+        InventoryPanelActivate();
     }
 }
