@@ -4528,7 +4528,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &586454480
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5558,7 +5558,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1773901083}
-  - {fileID: 708857876}
   - {fileID: 624887020}
   m_Father: {fileID: 1251673767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7817,7 +7816,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1214289180}
-  - {fileID: 994470433}
   - {fileID: 1066363015}
   m_Father: {fileID: 1251673767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14634,6 +14632,7 @@ MonoBehaviour:
   BMI: 0
   GeneralTimer: 0
   helpPanel: {fileID: 2065031262}
+  inventoryPanel: {fileID: 0}
 --- !u!4 &1500633544
 Transform:
   m_ObjectHideFlags: 0
@@ -20902,7 +20901,7 @@ GameObject:
   - component: {fileID: 2065031264}
   - component: {fileID: 2065031266}
   m_Layer: 5
-  m_Name: HelpPannel
+  m_Name: HelpPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
