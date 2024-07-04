@@ -65,34 +65,6 @@ public struct EquipmentTimers
     public float MatTimer;
 }
 
-public class ProductsBuy
-{
-    public int EnergyDrinkBuy;
-    public int ProteinBuy;
-    public int CreatineBuy;
-    public int GlovesBuy;
-    public int ZoneBuy;
-
-    public ProductsBuy()
-    {
-        this.EnergyDrinkBuy = -1;
-        this.ProteinBuy = -1;
-        this.CreatineBuy = -1;
-        this.GlovesBuy = -1;
-        this.ZoneBuy = -1;
-    }
-
-}
-
-public struct ProductLimits
-{
-    public int EnergyDrinkLimits;
-    public int ProteinLimits;
-    public int CreatineLimits;
-    public int GlovesLimits;
-    public int ZoneLimits;
-}
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager manager;
@@ -118,10 +90,7 @@ public class GameManager : MonoBehaviour
     public EquipmentUse equipmentUse;
     public EquipmentTimers equipmentTimers;
 
-    public ProductsBuy productsBuy;
-    public ProductLimits productLimits;
-
-    public float GeneralTimer;
+    public float GeneralTimer;    
 
     [SerializeField] GameObject helpPanel;
 
@@ -281,18 +250,6 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    public bool productBought(ref int productLimit, int maxProductLimit)
-    {
-        if (productLimit >= maxProductLimit)
-        {
-            return true;
-        }
-        return false;
-    }
-
-
-
-
     void Start()
     {
         var rand = new System.Random();
@@ -308,8 +265,6 @@ public class GameManager : MonoBehaviour
         print("BodyType: " + bodyType);
         InitStats();
         equipmentUse = new EquipmentUse();
-        productsBuy = new ProductsBuy();
-
 
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,7 +18,6 @@ public class NutrionistInteraction : MonoBehaviour
     private int index;
     public float wordSpeed;
     public bool playerIsClose;
-    private bool hasBought = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -81,32 +81,6 @@ public class NutrionistInteraction : MonoBehaviour
         {
             continueButton.SetActive(true);
         }
-
-        if (hasBought == false)
-        {
-            if (gameManager.productsBuy.ProteinBuy != -1 &&
-                gameManager.productsBuy.CreatineBuy != -1 &&
-                gameManager.productsBuy.EnergyDrinkBuy != -1 &&
-                gameManager.productsBuy.ZoneBuy != -1 &&
-                gameManager.productsBuy.GlovesBuy != -1)
-            {
-                if (gameManager.productBought(ref gameManager.productLimits.ProteinLimits, gameManager.productsBuy.ProteinBuy) &&
-                    gameManager.productBought(ref gameManager.productLimits.CreatineLimits, gameManager.productsBuy.CreatineBuy) &&
-                    gameManager.productBought(ref gameManager.productLimits.EnergyDrinkLimits, gameManager.productsBuy.EnergyDrinkBuy) &&
-                    gameManager.productBought(ref gameManager.productLimits.ZoneLimits, gameManager.productsBuy.ZoneBuy) &&
-                    gameManager.productBought(ref gameManager.productLimits.GlovesLimits, gameManager.productsBuy.GlovesBuy))
-                {
-                    dialogue = new List<string>
-                    {
-                        "You have bought your food program!",
-                        "Now you are able to improve your physical condition.",
-                        "Good luck!",
-                    };
-                    hasBought = true;
-
-                }
-            }
-        }
     }
 
     public void ZeroText()
@@ -121,6 +95,10 @@ public class NutrionistInteraction : MonoBehaviour
     public void NextLine()
     {
         continueButton.SetActive(false);
+        StartCoroutine(Typing());
+
+        /*
+        continueButton.SetActive(false);
         if (index < dialogue.Count - 1)
         {
             index++;
@@ -130,7 +108,12 @@ public class NutrionistInteraction : MonoBehaviour
         else if (index == dialogue.Count - 1)
         {
             dialoguePanel.SetActive(false);
-        }
+        } */
+    }
+
+    public void PassInputsToGameManager()
+    {
+        gameManager.ActivatePanel();
     }
 
     public void FoodProgramBasedOnPhysicalCondition()
@@ -147,11 +130,6 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("Your food program is ready.");
                 dialogue.Add("5 Protein, 5 Creatine, 4 Energy Drinks, 1 pair of Gloves, 1 Dipping Zone");
                 dialogue.Add("Πάρε κανά κιλό ρε χτικιάρη!!");
-                gameManager.productsBuy.ProteinBuy = 5;
-                gameManager.productsBuy.CreatineBuy = 5;
-                gameManager.productsBuy.EnergyDrinkBuy = 4;
-                gameManager.productsBuy.ZoneBuy = 1;
-                gameManager.productsBuy.GlovesBuy = 1;
 
                 break;
             }
@@ -163,9 +141,6 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("Your food program is ready.");
                 dialogue.Add("5 Protein, 1 Energy Drink, 1 Dipping Zone");
                 dialogue.Add("Είσαι Αστέρι!!");
-                gameManager.productsBuy.ProteinBuy = 5;
-                gameManager.productsBuy.EnergyDrinkBuy = 1;
-                gameManager.productsBuy.ZoneBuy = 1;
 
                 break;
             }
@@ -177,11 +152,6 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("Your food program is ready.");
                 dialogue.Add("1 Protein, 1 Creatine, 5 Energy Drink, 1 Gloves, 1 Dipping Zone");
                 dialogue.Add("Χάσε κανά κιλό ρε χοντρέ!!");
-                gameManager.productsBuy.ProteinBuy = 1;
-                gameManager.productsBuy.CreatineBuy = 1;
-                gameManager.productsBuy.EnergyDrinkBuy = 5;
-                gameManager.productsBuy.ZoneBuy = 1;
-                gameManager.productsBuy.GlovesBuy = 1;
 
                 break;
             }
@@ -193,9 +163,6 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("Your food program is ready.");
                 dialogue.Add("10 Energy Drink, 1 Gloves, 1 Dipping Zone");
                 dialogue.Add("Ε ρε τι κάνουν τα McDonalds!!");
-                gameManager.productsBuy.EnergyDrinkBuy = 10;
-                gameManager.productsBuy.ZoneBuy = 1;
-                gameManager.productsBuy.GlovesBuy = 1;
 
                 break;
             }
