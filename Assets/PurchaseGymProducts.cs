@@ -89,6 +89,7 @@ public class PurchaseGymProducts : MonoBehaviour
             gameManager.playerStats.Money -= 5f;
             gameManager.playerStats.Stamina += 0.1f;
             gameManager.InitStats();
+            gameManager.playerStats.Invetory["EnergyDrink"] += 1;
         }
         else
         {
@@ -104,6 +105,7 @@ public class PurchaseGymProducts : MonoBehaviour
             gameManager.playerStats.Weight += 0.1f;
             gameManager.playerStats.Stamina += 0.15f;
             gameManager.InitStats();
+            gameManager.playerStats.Invetory["Protein"] += 1;
         }
         else
         {
@@ -119,6 +121,8 @@ public class PurchaseGymProducts : MonoBehaviour
             gameManager.playerStats.Weight += 0.1f;
             gameManager.playerStats.Stamina += 0.2f;
             gameManager.InitStats();
+            gameManager.playerStats.Invetory["Creatinine"] += 1;
+
         }
         else
         {
@@ -132,6 +136,7 @@ public class PurchaseGymProducts : MonoBehaviour
             gameManager.playerStats.Money -= 10f;
             gameManager.playerStats.Stamina += 0.1f;
             gameManager.InitStats();
+            gameManager.playerStats.Invetory["Gloves"] += 1;
         }
         else
         {
@@ -145,6 +150,8 @@ public class PurchaseGymProducts : MonoBehaviour
             gameManager.playerStats.Money -= 25f;
             gameManager.playerStats.Stamina += 0.25f;
             gameManager.InitStats();
+            gameManager.playerStats.Invetory["Belt"] += 1;
+
         }
         else
         {
