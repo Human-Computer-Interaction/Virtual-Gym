@@ -2184,8 +2184,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1762597902}
-        m_TargetAssemblyTypeName: NPCInteraction, Assembly-CSharp
+      - m_Target: {fileID: 1452278098}
+        m_TargetAssemblyTypeName: NutrionistInteraction, Assembly-CSharp
         m_MethodName: NextLine
         m_Mode: 1
         m_Arguments:
@@ -14473,7 +14473,6 @@ MonoBehaviour:
   VendingMachine: {fileID: 1156120449}
   BMI: 0
   physicalCondition: Unknown
-  ableToBuy: 0
   GeneralTimer: 0
   helpPanel: {fileID: 2065031262}
 --- !u!4 &1500633544

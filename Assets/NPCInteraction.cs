@@ -150,7 +150,7 @@ public class NPCInteraction : MonoBehaviour
         {
             case "Underweight":
                 {
-
+                    gameManager.physicalCondition = "Underweight";
                     dialogue.Add("You are 'Underweight' so I created a gym program for you.");
                     dialogue.Add("This program will help you gain muscle, but you will have to eat more.");
                     dialogue.Add("Ask the nutritionist for more information about your food program.");
@@ -168,7 +168,7 @@ public class NPCInteraction : MonoBehaviour
                 }
             case "Normal":
                 {
-
+                    gameManager.physicalCondition = "Normal";
                     dialogue.Add("Your physical characteristics are 'Normal'.");
                     dialogue.Add("This program will help you maintain your weight.");
                     dialogue.Add("Ask the nutritionist for more information about your food program.");
@@ -186,7 +186,7 @@ public class NPCInteraction : MonoBehaviour
                 }
             case "Overweight":
                 {
-
+                    gameManager.physicalCondition = "Overweight";
                     dialogue.Add("You are 'Overweight' so I created a gym program for you.");
                     dialogue.Add("This program will help you to lose weight, but you will have to eat less.");
                     dialogue.Add("Ask the nutritionist for more information about your food program.");
@@ -204,7 +204,7 @@ public class NPCInteraction : MonoBehaviour
                 }
             case "Obese":
                 {
-
+                    gameManager.physicalCondition = "Obese";
                     dialogue.Add("You are 'Obese' so I created a gym program for you.");
                     dialogue.Add("This program will help you lose weight, but you will have to eat less.");
                     dialogue.Add("Ask the nutritionist for more information about your food program.");

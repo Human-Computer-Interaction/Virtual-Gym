@@ -95,10 +95,6 @@ public class NutrionistInteraction : MonoBehaviour
     public void NextLine()
     {
         continueButton.SetActive(false);
-        StartCoroutine(Typing());
-
-        /*
-        continueButton.SetActive(false);
         if (index < dialogue.Count - 1)
         {
             index++;
@@ -108,12 +104,13 @@ public class NutrionistInteraction : MonoBehaviour
         else if (index == dialogue.Count - 1)
         {
             dialoguePanel.SetActive(false);
-        } */
+        }
     }
 
     public void PassInputsToGameManager()
     {
         gameManager.ActivatePanel();
+        FoodProgramBasedOnPhysicalCondition();
     }
 
     public void FoodProgramBasedOnPhysicalCondition()
