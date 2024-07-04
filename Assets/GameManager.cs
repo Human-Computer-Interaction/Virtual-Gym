@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
     public PlayerStats playerStats;
 
     public float BMI;
+    public string physicalCondition;
 
     public EquipmentUse equipmentUse;
     public EquipmentTimers equipmentTimers;
@@ -186,18 +187,22 @@ public class GameManager : MonoBehaviour
     {
         if (BMI < 18.5f)
         {
+            physicalCondition = "Underweight";
             return "Underweight";
         }
         else if (BMI >= 18.5f && BMI <= 24.9f)
         {
+            physicalCondition = "Normal";
             return "Normal";
         }
         else if (BMI >= 25f && BMI <= 29.9f)
         {
+            physicalCondition = "Overweight";
             return "Overweight";
         }
         else if (BMI >= 30f)
         {
+            physicalCondition = "Obese";
             return "Obese";
         }
 
