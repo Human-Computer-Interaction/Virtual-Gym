@@ -16,6 +16,7 @@ TagManager:
   - Push-Ups
   - Weights
   - Vending_Machine
+  - EnergyItems
   layers:
   - Default
   - TransparentFX
