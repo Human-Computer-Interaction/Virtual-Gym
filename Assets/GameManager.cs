@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PlayerStats
 {
@@ -109,6 +107,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text creatininesValue;
     [SerializeField] TMP_Text glovesValue;
     [SerializeField] TMP_Text beltsValue;
+    [SerializeField] GameObject pausePanel;
 
     public void Awake()
     {
@@ -308,11 +307,40 @@ public class GameManager : MonoBehaviour
         glovesValue.text = playerStats.Invetory["Gloves"].ToString();
         beltsValue.text = playerStats.Invetory["Belt"].ToString();
     }
-
+    public void PausePanelActivate()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+            pausePanel.SetActive(true);
+        }
+    }
+    public void ResumeGameButton()
+    {
+        pausePanel.SetActive(false);
+        UnpauseGame();
+    }
+    public void ExitGameButton(){
+        SceneManager.LoadSceneAsync("Menu");
+        Destroy(GameManager.manager);
+    }
     void Update()
     {
         CheckCollision();
         HelpPanelActivate();
         InventoryPanelActivate();
+        PausePanelActivate();
+    }
+    public void PauseGame()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Time.timeScale = 0;
+    }
+    public void UnpauseGame()
+    {
+
+        Time.timeScale = 1;
+        pausePanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
