@@ -1,18 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExitDoor : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private bool playerNearDoor;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Athlete"))
+        {
+            playerNearDoor = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+
+        if (other.gameObject.CompareTag("Athlete"))
+        {
+            playerNearDoor = false;
+        }
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && playerNearDoor)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            SceneManager.LoadSceneAsync("Menu");
+            Destroy(GameManager.manager);
+        }
     }
 }
