@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
 
     public float GeneralTimer;
 
+    [SerializeField] GameObject helpPanel;
 
     public void Awake()
     {
@@ -264,9 +265,17 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void helpPanelActivate()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            helpPanel.SetActive(!helpPanel.activeSelf);
+        }
+    }
 
     void Update()
     {
         CheckCollision();
+        helpPanelActivate();
     }
 }
