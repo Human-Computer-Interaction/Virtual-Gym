@@ -132,7 +132,7 @@ public class NutrionistInteraction : MonoBehaviour
     public void FoodProgramBasedOnPhysicalCondition()
     {
         dialogue.Clear();
-        Debug.Log("Physical Condition: " + gameManager.physicalCondition); // ��� ������ ��� �����
+        Debug.Log("Physical Condition: " + gameManager.physicalCondition);
 
         switch (gameManager.physicalCondition)
         {
@@ -141,8 +141,10 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("The fitness instructor gave you a program that will help you gain muscle, but you will have to eat more.");
                 dialogue.Add("Let me show you what to buy from the vending machine.");
                 dialogue.Add("Your food program is ready.");
-                dialogue.Add("5 Protein, 5 Creatine, 4 Energy Drinks, 1 pair of Gloves, 1 Dipping Zone");
-                //dialogue.Add("���� ���� ���� �� ��������!!");
+                dialogue.Add("1 protein, 1 creatine, 1 dipping zone");
+                dialogue.Add("Goal: Significant weight gain and stamina improvement.");
+                dialogue.Add("It will cost you 75$.");
+                
                 break;
 
             case "Normal":
@@ -150,8 +152,9 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("The fitness instructor gave you a program that will help you maintain your weight.");
                 dialogue.Add("Let me show you what to buy from the vending machine.");
                 dialogue.Add("Your food program is ready.");
-                dialogue.Add("5 Protein, 1 Energy Drink, 1 Dipping Zone");
-                //dialogue.Add("����� ������!!");
+                dialogue.Add("1 energy drink, 1 protein, 1 pair of gloves");
+                dialogue.Add("Goal: Moderate weight gain and stamina improvement.");
+                dialogue.Add("It will cost you 35$.");
                 break;
 
             case "Overweight":
@@ -159,8 +162,9 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("The fitness instructor gave you a program that will help you to lose weight, but you will have to eat less.");
                 dialogue.Add("Let me show you what to buy from the vending machine.");
                 dialogue.Add("Your food program is ready.");
-                dialogue.Add("1 Protein, 1 Creatine, 5 Energy Drink, 1 Gloves, 1 Dipping Zone");
-                //dialogue.Add("���� ���� ���� �� ������!!");
+                dialogue.Add("2 energy drinks, 1 pair of gloves");
+                dialogue.Add("Goal: Minimal weight gain but significant stamina improvement.");
+                dialogue.Add("It will cost you 20$.");
                 break;
 
             case "Obese":
@@ -168,8 +172,9 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("The fitness instructor gave you a program that will help you to lose weight, but you will have to eat less.");
                 dialogue.Add("Let me show you what to buy from the vending machine.");
                 dialogue.Add("Your food program is ready.");
-                dialogue.Add("10 Energy Drink, 1 Gloves, 1 Dipping Zone");
-                //dialogue.Add("� �� �� ������ �� McDonalds!!");
+                dialogue.Add("1 energy drink, 1 pair of gloves");
+                dialogue.Add("Goal: Minimal weight gain and minimal stamina improvement.");
+                dialogue.Add("It will cost you 15$.");
                 break;
 
             default:
