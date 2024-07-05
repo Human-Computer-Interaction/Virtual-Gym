@@ -70,35 +70,35 @@ public class NPCInteraction : MonoBehaviour
             continueButton.SetActive(true);
         }
 
-        if (hasCompleted == false)
-        {
-            if (gameManager.equipmentUse.MatUse != -1 &&
-                gameManager.equipmentUse.DumbellsUse != -1 &&
-                gameManager.equipmentUse.BarUse != -1 &&
+        // if (hasCompleted == false)
+        // {
+        //     if (gameManager.equipmentUse.MatUse != -1 &&
+        //         gameManager.equipmentUse.DumbellsUse != -1 &&
+        //         gameManager.equipmentUse.BarUse != -1 &&
 
-                gameManager.equipmentUse.LegExtensionUse != -1 &&
-                gameManager.equipmentUse.TreadmillUse != -1 &&
-                gameManager.equipmentUse.BikeUse != -1)
-            {
-                if (gameManager.exerciseComplited(ref gameManager.equipmentTimers.MatTimer, gameManager.equipmentUse.MatUse) &&
-                    gameManager.exerciseComplited(ref gameManager.equipmentTimers.DumbellsTimer, gameManager.equipmentUse.DumbellsUse) &&
-                    gameManager.exerciseComplited(ref gameManager.equipmentTimers.BarTimer, gameManager.equipmentUse.BarUse) &&
+        //         gameManager.equipmentUse.LegExtensionUse != -1 &&
+        //         gameManager.equipmentUse.TreadmillUse != -1 &&
+        //         gameManager.equipmentUse.BikeUse != -1)
+        //     {
+        //         if (gameManager.exerciseComplited(ref gameManager.equipmentTimers.MatTimer, gameManager.equipmentUse.MatUse) &&
+        //             gameManager.exerciseComplited(ref gameManager.equipmentTimers.DumbellsTimer, gameManager.equipmentUse.DumbellsUse) &&
+        //             gameManager.exerciseComplited(ref gameManager.equipmentTimers.BarTimer, gameManager.equipmentUse.BarUse) &&
 
-                    gameManager.exerciseComplited(ref gameManager.equipmentTimers.LegExtensionTimer, gameManager.equipmentUse.LegExtensionUse) &&
-                    gameManager.exerciseComplited(ref gameManager.equipmentTimers.TreadmillTimer, gameManager.equipmentUse.TreadmillUse) &&
-                    gameManager.exerciseComplited(ref gameManager.equipmentTimers.BikeTimer, gameManager.equipmentUse.BikeUse))
-                {
-                    dialogue = new List<string>
-                {
-                    "You have finished your exercise. Good Job!",
-                    "Now you have to eat some food. Ask the nutritionist for more info about the food.",
-                    "Good luck!",
-                };
-                    hasCompleted = true;
+        //             gameManager.exerciseComplited(ref gameManager.equipmentTimers.LegExtensionTimer, gameManager.equipmentUse.LegExtensionUse) &&
+        //             gameManager.exerciseComplited(ref gameManager.equipmentTimers.TreadmillTimer, gameManager.equipmentUse.TreadmillUse) &&
+        //             gameManager.exerciseComplited(ref gameManager.equipmentTimers.BikeTimer, gameManager.equipmentUse.BikeUse))
+        //         {
+        //             dialogue = new List<string>
+        //         {
+        //             "You have finished your exercise. Good Job!",
+        //             "Now you have to eat some food. Ask the nutritionist for more info about the food.",
+        //             "Good luck!",
+        //         };
+        //             hasCompleted = true;
 
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
     }
     public void ZeroText()
     {

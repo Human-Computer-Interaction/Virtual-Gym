@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -77,6 +78,7 @@ public struct EquipmentTimers
 public class GameManager : MonoBehaviour
 {
     public static GameManager manager;
+    private System.Random rand;
 
     [SerializeField] GameObject Athlete;
     [SerializeField] GameObject Bar;
@@ -100,7 +102,7 @@ public class GameManager : MonoBehaviour
     public EquipmentUse equipmentUse;
     public EquipmentTimers equipmentTimers;
 
-    public float GeneralTimer;    
+    public float GeneralTimer;
 
     [SerializeField] GameObject helpPanel;
     [SerializeField] GameObject inventoryPanel;
@@ -110,7 +112,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text glovesValue;
     [SerializeField] TMP_Text beltsValue;
     [SerializeField] GameObject pausePanel;
-    [SerializeField] GameObject treadmillFinished;
+    [SerializeField] GameObject treadmill1Finished;
+    [SerializeField] GameObject treadmill2Finished;
+
     [SerializeField] GameObject barFinished;
     [SerializeField] GameObject legExtensionFinished;
     [SerializeField] GameObject dumbellFinished;
@@ -124,6 +128,7 @@ public class GameManager : MonoBehaviour
     private bool isBikeFinished = false;
     private bool isMatFinished = false;
 
+    int bonusMoney = 0;
     public void Awake()
     {
         if (manager == null)
@@ -149,6 +154,7 @@ public class GameManager : MonoBehaviour
         Collider DumbellsCollider = Dumbells.GetComponent<Collider>();
 
         if (AthleteCollider != null && BarCollider != null)
+        {
             if (AthleteCollider.bounds.Intersects(BarCollider.bounds))
             {
                 updateGeneralTimer(ref GeneralTimer);
@@ -157,11 +163,20 @@ public class GameManager : MonoBehaviour
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
                 if (isBarFinished)
                 {
+                    bonusMoney = rand.Next(5, 15);
+                    playerStats.Money += bonusMoney;
+                    InitStats();
+                    equipmentUse.BarUse = -2;
+                }
+                else if (equipmentUse.BarUse == -2)
+                {
                     barFinished.SetActive(true);
                 }
             }
             else barFinished.SetActive(false);
+        }
         if (AthleteCollider != null && LegCollider != null)
+        {
             if (AthleteCollider.bounds.Intersects(LegCollider.bounds))
             {
                 updateGeneralTimer(ref GeneralTimer);
@@ -170,11 +185,20 @@ public class GameManager : MonoBehaviour
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
                 if (isLegExtensionFinished)
                 {
+                    bonusMoney = rand.Next(5, 15);
+                    playerStats.Money += bonusMoney;
+                    InitStats();
+                    equipmentUse.LegExtensionUse = -2;
+                }
+                else if (equipmentUse.LegExtensionUse == -2)
+                {
                     legExtensionFinished.SetActive(true);
                 }
             }
             else legExtensionFinished.SetActive(false);
+        }
         if (AthleteCollider != null && BikeCollider != null)
+        {
             if (AthleteCollider.bounds.Intersects(BikeCollider.bounds))
             {
                 updateGeneralTimer(ref GeneralTimer);
@@ -183,11 +207,20 @@ public class GameManager : MonoBehaviour
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
                 if (isBikeFinished)
                 {
+                    bonusMoney = rand.Next(5, 15);
+                    playerStats.Money += bonusMoney;
+                    InitStats();
+                    equipmentUse.BikeUse = -2;
+                }
+                else if (equipmentUse.BikeUse == -2)
+                {
                     bikeFinished.SetActive(true);
                 }
             }
             else bikeFinished.SetActive(false);
+        }
         if (AthleteCollider != null && Treadmill1Collider != null)
+        {
             if (AthleteCollider.bounds.Intersects(Treadmill1Collider.bounds))
             {
                 updateGeneralTimer(ref GeneralTimer);
@@ -196,13 +229,20 @@ public class GameManager : MonoBehaviour
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
                 if (isTreadmillFinished)
                 {
-                    treadmillFinished.SetActive(true);
+                    bonusMoney = rand.Next(5, 15);
+                    playerStats.Money += bonusMoney;
+                    InitStats();
+                    equipmentUse.TreadmillUse = -2;
+                }
+                else if (equipmentUse.TreadmillUse == -2)
+                {
+                    treadmill1Finished.SetActive(true);
                 }
             }
-            else treadmillFinished.SetActive(false);
-        // This code is duplicate of the above code
-
+            else treadmill1Finished.SetActive(false);
+        }
         if (AthleteCollider != null && Treadmill2Collider != null)
+        {
             if (AthleteCollider.bounds.Intersects(Treadmill2Collider.bounds))
             {
                 updateGeneralTimer(ref GeneralTimer);
@@ -211,10 +251,18 @@ public class GameManager : MonoBehaviour
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
                 if (isTreadmillFinished)
                 {
-                    treadmillFinished.SetActive(true);
+                    bonusMoney = rand.Next(5, 15);
+                    playerStats.Money += bonusMoney;
+                    InitStats();
+                    equipmentUse.TreadmillUse = -2;
+                }
+                else if (equipmentUse.TreadmillUse == -2)
+                {
+                    treadmill2Finished.SetActive(true);
                 }
             }
-            else treadmillFinished.SetActive(false);
+            else treadmill2Finished.SetActive(false);
+        }
         if (AthleteCollider != null && MatCollider != null)
         {
             if (AthleteCollider.bounds.Intersects(MatCollider.bounds))
@@ -225,12 +273,20 @@ public class GameManager : MonoBehaviour
                 ScreenTimer.text = string.Format("{0:ss\\:ff}", timeSpan); // show seconds and ms
                 if (isMatFinished)
                 {
+                    bonusMoney = rand.Next(5, 15);
+                    playerStats.Money += bonusMoney;
+                    InitStats();
+                    equipmentUse.MatUse = -2;
+                }
+                else if (equipmentUse.MatUse == -2)
+                {
                     matFinished.SetActive(true);
                 }
             }
             else matFinished.SetActive(false);
         }
         if (AthleteCollider != null && DumbellsCollider != null)
+        {
             if (AthleteCollider.bounds.Intersects(DumbellsCollider.bounds))
             {
                 updateGeneralTimer(ref GeneralTimer);
@@ -240,9 +296,18 @@ public class GameManager : MonoBehaviour
                 if (isDumbellFinished)
                 {
                     dumbellFinished.SetActive(true);
+                    bonusMoney = rand.Next(5, 15);
+                    playerStats.Money += bonusMoney;
+                    InitStats();
+                    equipmentUse.DumbellsUse = -2;
+                }
+                else if (equipmentUse.DumbellsUse == -2)
+                {
+                    dumbellFinished.SetActive(true);
                 }
             }
             else dumbellFinished.SetActive(false);
+        }
     }
     public float CalculateBMI(PlayerStats playerStats)
     {
@@ -297,6 +362,7 @@ public class GameManager : MonoBehaviour
             Timer += Time.deltaTime;
             isFinished = false;
         }
+        else if (maxTime == -2) isFinished = false;
         else isFinished = true;
     }
     public void updateGeneralTimer(ref float Timer)
@@ -311,18 +377,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool exerciseComplited(ref float Timer, float maxTime)
-    {
-        if (Timer >= maxTime)
-        {
-            return true;
-        }
-        return false;
-    }
+    // public bool exerciseComplited(ref float Timer, float maxTime)
+    // {
+    //     if (Timer >= maxTime)
+    //     {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     void Start()
     {
-        var rand = new System.Random();
+        rand = new System.Random();
         playerStats = new PlayerStats
         {
             Money = rand.Next(1, 20),
