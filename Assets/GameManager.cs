@@ -93,7 +93,9 @@ public class GameManager : MonoBehaviour
     public PlayerStats playerStats;
 
     public float BMI;
-    public string physicalCondition;
+    public string physicalCondition = "Unknown";
+
+    public bool hasSpokenToNpc = false;
 
     public EquipmentUse equipmentUse;
     public EquipmentTimers equipmentTimers;

@@ -122,6 +122,7 @@ public class NPCInteraction : MonoBehaviour
             dialoguePanel.SetActive(false);
             if (!hasCharacteristics)
                 characteristicsInputPanel.SetActive(true);
+            playerIsClose = false;
         }
     }
     public void PassInputsToGameManager()
@@ -138,6 +139,7 @@ public class NPCInteraction : MonoBehaviour
         inputsFields[2].text = "";
         hasCharacteristics = true;
         GymPlanBasedOnBMI();
+        gameManager.hasSpokenToNpc = true;
     }
 
     public void GymPlanBasedOnBMI()

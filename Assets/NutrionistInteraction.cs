@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class NutrionistInteraction : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class NutrionistInteraction : MonoBehaviour
     private GameObject playerCameraRotation;
     private GameObject playerCamera;
 
+    public GameObject getProgramButton;
     private List<string> dialogue;
     private int index;
     public float wordSpeed;
@@ -47,7 +49,6 @@ public class NutrionistInteraction : MonoBehaviour
             Debug.LogError("GameManager component is not assigned!");
             return;
         }
-
         InitializeDialogue();
     }
 
@@ -57,7 +58,6 @@ public class NutrionistInteraction : MonoBehaviour
         {
             HandleInteraction();
         }
-
         if (dialogueText.text == dialogue[index])
         {
             continueButton.SetActive(true);
@@ -91,14 +91,6 @@ public class NutrionistInteraction : MonoBehaviour
                 "You should talk to the fitness instructor to check your physical condition."
             };
         }
-        else
-        {
-            dialogue = new List<string>
-            {
-                "Welcome to PADA Gym!",
-                "You have already checked your physical condition."
-            };
-        }
     }
 
     public void ZeroText()
@@ -113,6 +105,10 @@ public class NutrionistInteraction : MonoBehaviour
     public void NextLine()
     {
         continueButton.SetActive(false);
+        if (gameManager.hasSpokenToNpc)
+        {
+            PassInputsToGameManager();
+        }
         if (index < dialogue.Count - 1)
         {
             index++;
@@ -122,8 +118,7 @@ public class NutrionistInteraction : MonoBehaviour
         else if (index == dialogue.Count - 1)
         {
             dialoguePanel.SetActive(false);
-            // Óôï ôÝëïò ôïõ äéáëüãïõ êáëåßôáé ç ìÝèïäïò PassInputsToGameManager
-            PassInputsToGameManager();
+            playerIsClose = false;
         }
     }
 
@@ -137,7 +132,7 @@ public class NutrionistInteraction : MonoBehaviour
     public void FoodProgramBasedOnPhysicalCondition()
     {
         dialogue.Clear();
-        Debug.Log("Physical Condition: " + gameManager.physicalCondition); // Ãéá Ýëåã÷ï ôçò ôéìÞò
+        Debug.Log("Physical Condition: " + gameManager.physicalCondition); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 
         switch (gameManager.physicalCondition)
         {
@@ -147,7 +142,7 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("Let me show you what to buy from the vending machine.");
                 dialogue.Add("Your food program is ready.");
                 dialogue.Add("5 Protein, 5 Creatine, 4 Energy Drinks, 1 pair of Gloves, 1 Dipping Zone");
-                dialogue.Add("ÐÜñå êáíÜ êéëü ñå ÷ôéêéÜñç!!");
+                //dialogue.Add("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!!");
                 break;
 
             case "Normal":
@@ -156,7 +151,7 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("Let me show you what to buy from the vending machine.");
                 dialogue.Add("Your food program is ready.");
                 dialogue.Add("5 Protein, 1 Energy Drink, 1 Dipping Zone");
-                dialogue.Add("Åßóáé ÁóôÝñé!!");
+                //dialogue.Add("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!!");
                 break;
 
             case "Overweight":
@@ -165,7 +160,7 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("Let me show you what to buy from the vending machine.");
                 dialogue.Add("Your food program is ready.");
                 dialogue.Add("1 Protein, 1 Creatine, 5 Energy Drink, 1 Gloves, 1 Dipping Zone");
-                dialogue.Add("×Üóå êáíÜ êéëü ñå ÷ïíôñÝ!!");
+                //dialogue.Add("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!!");
                 break;
 
             case "Obese":
@@ -174,17 +169,16 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("Let me show you what to buy from the vending machine.");
                 dialogue.Add("Your food program is ready.");
                 dialogue.Add("10 Energy Drink, 1 Gloves, 1 Dipping Zone");
-                dialogue.Add("Å ñå ôé êÜíïõí ôá McDonalds!!");
+                //dialogue.Add("ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ McDonalds!!");
                 break;
 
             default:
                 dialogue.Add("You need to check your physical condition with the fitness instructor first.");
                 break;
         }
-
+        gameManager.hasSpokenToNpc = false;
         dialogueText.text = dialogue[0];
-        dialoguePanel.SetActive(true);
-        StartCoroutine(Typing());
+        continueButton.SetActive(true);
     }
 
     IEnumerator Typing()
@@ -193,6 +187,14 @@ public class NutrionistInteraction : MonoBehaviour
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
+        }
+    }
+    public void AthleteHasInteractedWithNpc()
+    {
+        if (gameManager.hasSpokenToNpc == true)
+        {
+            getProgramButton.SetActive(true);
+            continueButton.SetActive(false);
         }
     }
 }
