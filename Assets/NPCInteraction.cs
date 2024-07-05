@@ -20,7 +20,6 @@ public class NPCInteraction : MonoBehaviour
     public float wordSpeed;
     public bool playerIsClose;
     private bool hasCharacteristics = false;
-    private bool hasCompleted = false;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Athlete"))
