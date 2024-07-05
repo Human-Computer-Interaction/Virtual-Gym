@@ -349,11 +349,11 @@ public class GameManager : MonoBehaviour
     {
         var textMeshComponents = PlayerStatsPanel.GetComponentsInChildren<TextMeshProUGUI>();
         textMeshComponents = textMeshComponents.Where(x => x.tag == "StatsValues").ToArray();
-        textMeshComponents[0].text = playerStats.Weight.ToString();
+        textMeshComponents[0].text = String.Format("{0:0.0}",playerStats.Weight.ToString());
         textMeshComponents[1].text = playerStats.Age.ToString();
         textMeshComponents[2].text = playerStats.Height.ToString();
         textMeshComponents[3].text = playerStats.Money.ToString();
-        textMeshComponents[4].text = playerStats.Stamina.ToString();
+        textMeshComponents[4].text = String.Format("{0:0.0}",playerStats.Stamina.ToString());
     }
     public void ActivatePanel()
     {
