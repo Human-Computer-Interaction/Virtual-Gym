@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PurchaseGymProducts : MonoBehaviour
@@ -8,31 +7,62 @@ public class PurchaseGymProducts : MonoBehaviour
     public GameObject gameManagerComponent;
 
     [SerializeField]
-    public GameObject productsPanel;
+    public GameObject vendingMachinePanel;
 
-    public bool playerIsClose;
-
+    private bool playerIsClose;
+    [SerializeField]
+    public GameObject energyItemsPanel;
+    [SerializeField]
+    public GameObject fitnessItemsPanel;
+    [SerializeField]
+    public GameObject energyDrinksButton;
+    [SerializeField]
+    public GameObject fitnessProductButton;
+    [SerializeField]
+    public GameObject exitButton;
+    [SerializeField]
+    public GameObject moneyWarning;
     private GameManager gameManager;
 
-    private GameObject playerCameraRotation;
+    private GameObject player;
     void Start()
     {
-        playerCameraRotation = GameObject.Find("Athlete");
+        player = GameObject.Find("Athlete");
         gameManager = gameManagerComponent.GetComponent<GameManager>();
     }
 
-    public void DisplayProducts()
+    public void DisplayVendingMachinePanel()
     {
-        productsPanel.SetActive(true);
+        vendingMachinePanel.SetActive(true);
+        player.GetComponentInChildren<MouseLook>().enabled = false;
         Cursor.lockState = CursorLockMode.Confined;
-        playerCameraRotation.GetComponentInChildren<MouseLook>().enabled = false;
+
     }
-    public void PurchaseProduct()
+
+    public void DisplayEnergyItems()
     {
-        // To do
+        energyDrinksButton.SetActive(false);
+        fitnessProductButton.SetActive(false);
+        exitButton.SetActive(false);
+        energyItemsPanel.SetActive(true);
     }
 
+    public void DisplayFitnessItems()
+    {
+        energyDrinksButton.SetActive(false);
+        fitnessProductButton.SetActive(false);
+        exitButton.SetActive(false);
+        fitnessItemsPanel.SetActive(true);
+    }
 
+    public void ReturnToCaregorySelection()
+    {
+        energyItemsPanel.SetActive(false);
+        fitnessItemsPanel.SetActive(false);
+        energyDrinksButton.SetActive(true);
+        fitnessProductButton.SetActive(true);
+        exitButton.SetActive(true);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -46,8 +76,8 @@ public class PurchaseGymProducts : MonoBehaviour
         if (other.gameObject.CompareTag("Athlete"))
         {
             playerIsClose = false;
-            productsPanel.SetActive(false);
-            playerCameraRotation.GetComponentInChildren<MouseLook>().enabled = true;
+            vendingMachinePanel.SetActive(false);
+            player.GetComponentInChildren<MouseLook>().enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
@@ -57,19 +87,29 @@ public class PurchaseGymProducts : MonoBehaviour
         if (gameManager.playerStats.Money >= 5f)
         {
             gameManager.playerStats.Money -= 5f;
-            gameManager.playerStats.Stamina += 10f;
+            gameManager.playerStats.Stamina += 0.1f;
             gameManager.InitStats();
+            gameManager.playerStats.Invetory["EnergyDrink"] += 1;
+        }
+        else
+        {
+            StartCoroutine(DisplayMoneyWarning());
         }
     }
 
-    public void BuyEnergyProtein()
+    public void BuyProtein()
     {
         if (gameManager.playerStats.Money >= 20f)
         {
             gameManager.playerStats.Money -= 20f;
             gameManager.playerStats.Weight += 0.1f;
-            gameManager.playerStats.Stamina += 15f;
+            gameManager.playerStats.Stamina += 0.15f;
             gameManager.InitStats();
+            gameManager.playerStats.Invetory["Protein"] += 1;
+        }
+        else
+        {
+            StartCoroutine(DisplayMoneyWarning());
         }
     }
 
@@ -79,16 +119,65 @@ public class PurchaseGymProducts : MonoBehaviour
         {
             gameManager.playerStats.Money -= 30f;
             gameManager.playerStats.Weight += 0.1f;
-            gameManager.playerStats.Stamina += 10f;
+            gameManager.playerStats.Stamina += 0.2f;
             gameManager.InitStats();
+            gameManager.playerStats.Invetory["Creatinine"] += 1;
+
+        }
+        else
+        {
+            StartCoroutine(DisplayMoneyWarning());
         }
     }
+    public void BuyGloves()
+    {
+        if (gameManager.playerStats.Money >= 10f)
+        {
+            gameManager.playerStats.Money -= 10f;
+            gameManager.playerStats.Stamina += 0.1f;
+            gameManager.InitStats();
+            gameManager.playerStats.Invetory["Gloves"] += 1;
+        }
+        else
+        {
+            StartCoroutine(DisplayMoneyWarning());
+        }
+    }
+    public void BuyDippingBelt()
+    {
+        if (gameManager.playerStats.Money >= 25f)
+        {
+            gameManager.playerStats.Money -= 25f;
+            gameManager.playerStats.Stamina += 0.25f;
+            gameManager.InitStats();
+            gameManager.playerStats.Invetory["Belt"] += 1;
 
+        }
+        else
+        {
+            StartCoroutine(DisplayMoneyWarning());
+        }
+
+    }
+    public void ExitSnackMachine()
+    {
+        vendingMachinePanel.SetActive(false);
+        player.GetComponentInChildren<MouseLook>().enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+    private IEnumerator DisplayMoneyWarning()
+    {
+
+        moneyWarning.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        moneyWarning.SetActive(false);
+
+    }
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && playerIsClose)
         {
-            DisplayProducts();
+            DisplayVendingMachinePanel();
         }
     }
 
