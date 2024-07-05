@@ -381,6 +381,8 @@ public class GameManager : MonoBehaviour
         if (generalTimerToInt / 10 > 0)
         {
             playerStats.Money += 1;
+            playerStats.Weight -= 0.1f;
+            playerStats.Stamina += 0.1f;
             InitStats();
             Timer = 0;
         }
