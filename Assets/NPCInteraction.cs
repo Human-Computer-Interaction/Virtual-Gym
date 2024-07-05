@@ -77,6 +77,14 @@ public class NPCInteraction : MonoBehaviour
                     "Good luck!",
                 };
         }
+        if (gameManager.athleteBoughtAllItems)
+        {
+            dialogue = new List<string>
+                {
+                    "Seems like you have also finished your nutrition program. Good Job!",
+                    "Thanks for using PADA Gym."
+                };
+        }
     }
     public void ZeroText()
     {
@@ -125,7 +133,6 @@ public class NPCInteraction : MonoBehaviour
         dialogue.Clear();
         gameManager.CalculateBMI(gameManager.playerStats);
         string BodyType = gameManager.BodyTypeBasedOnBmi();
-        print(BodyType);
         switch (BodyType)
         {
             case "Underweight":

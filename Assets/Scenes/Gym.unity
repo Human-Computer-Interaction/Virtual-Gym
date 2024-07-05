@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 45801273}
   - component: {fileID: 45801272}
   m_Layer: 5
-  m_Name: CreatininesValue
+  m_Name: CreatinesValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3017,7 +3017,7 @@ GameObject:
   - component: {fileID: 356739014}
   - component: {fileID: 356739013}
   m_Layer: 5
-  m_Name: BuyProteinButton
+  m_Name: BuyCreatinineButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5635,7 +5635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &586454480
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6207,7 +6207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635640599}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.594, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7051,7 +7051,7 @@ GameObject:
   - component: {fileID: 722026648}
   - component: {fileID: 722026647}
   m_Layer: 5
-  m_Name: Creatinines
+  m_Name: Creatines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7096,7 +7096,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Creatinines
+  m_text: 'Creatines
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: b246c4190f4e46ec9352fe15a7b09ce0, type: 2}
@@ -12298,6 +12300,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 100000, guid: b42d8ed352e936b408a1eac1967fad87, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b42d8ed352e936b408a1eac1967fad87, type: 3}
       propertyPath: m_TagString
       value: Vending_Machine
       objectReference: {fileID: 0}
@@ -12397,6 +12403,11 @@ MonoBehaviour:
   fitnessProductButton: {fileID: 2144568495}
   exitButton: {fileID: 1160393288}
   moneyWarning: {fileID: 38598468}
+  buyEnergyDrinkButton: {fileID: 624887021}
+  buyProteinButton: {fileID: 1066363016}
+  buyCreatineButton: {fileID: 356739013}
+  buyGlovesButton: {fileID: 724374125}
+  buyDippingBeltButton: {fileID: 1548782573}
 --- !u!65 &1156120454
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17988,7 +17999,7 @@ MonoBehaviour:
   inventoryPanel: {fileID: 522858579}
   energyDrinksValue: {fileID: 528129470}
   proteinsValue: {fileID: 995950995}
-  creatininesValue: {fileID: 45801272}
+  creatinesValue: {fileID: 45801272}
   glovesValue: {fileID: 1975048513}
   beltsValue: {fileID: 734128224}
   pausePanel: {fileID: 1056629763}
@@ -17999,6 +18010,7 @@ MonoBehaviour:
   dumbellFinished: {fileID: 1222461623}
   bikeFinished: {fileID: 1005887342}
   matFinished: {fileID: 514937000}
+  athleteBoughtAllItems: 0
 --- !u!4 &1500633544
 Transform:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PurchaseGymProducts : MonoBehaviour
 {
@@ -22,6 +24,16 @@ public class PurchaseGymProducts : MonoBehaviour
     public GameObject exitButton;
     [SerializeField]
     public GameObject moneyWarning;
+    [SerializeField]
+    public Button buyEnergyDrinkButton;
+    [SerializeField]
+    public Button buyProteinButton;
+    [SerializeField]
+    public Button buyCreatineButton;
+    [SerializeField]
+    public Button buyGlovesButton;
+    [SerializeField]
+    public Button buyDippingBeltButton;
     private GameManager gameManager;
 
     private GameObject player;
@@ -91,6 +103,8 @@ public class PurchaseGymProducts : MonoBehaviour
             gameManager.playerStats.Stamina += 1.5f;
             gameManager.InitStats();
             gameManager.playerStats.Invetory["EnergyDrink"] += 1;
+            gameManager.itemsToBuyFromVendingMachine["EnergyDrink"] -= 1;
+            gameManager.athleteBoughtAllItems = BoughtAllItems();
         }
         else
         {
@@ -107,6 +121,8 @@ public class PurchaseGymProducts : MonoBehaviour
             gameManager.playerStats.Stamina += 1f;
             gameManager.InitStats();
             gameManager.playerStats.Invetory["Protein"] += 1;
+            gameManager.itemsToBuyFromVendingMachine["Protein"] -= 1;
+            gameManager.athleteBoughtAllItems = BoughtAllItems();
         }
         else
         {
@@ -122,7 +138,9 @@ public class PurchaseGymProducts : MonoBehaviour
             gameManager.playerStats.Weight += 1f;
             gameManager.playerStats.Stamina += 0.5f;
             gameManager.InitStats();
-            gameManager.playerStats.Invetory["Creatinine"] += 1;
+            gameManager.playerStats.Invetory["Creatine"] += 1;
+            gameManager.itemsToBuyFromVendingMachine["Creatine"] -= 1;
+            gameManager.athleteBoughtAllItems = BoughtAllItems();
 
         }
         else
@@ -139,6 +157,8 @@ public class PurchaseGymProducts : MonoBehaviour
             gameManager.playerStats.Weight += 0.3f;
             gameManager.InitStats();
             gameManager.playerStats.Invetory["Gloves"] += 1;
+            gameManager.itemsToBuyFromVendingMachine["Gloves"] -= 1;
+            gameManager.athleteBoughtAllItems = BoughtAllItems();
         }
         else
         {
@@ -154,6 +174,8 @@ public class PurchaseGymProducts : MonoBehaviour
             gameManager.playerStats.Weight += 0.75f;
             gameManager.InitStats();
             gameManager.playerStats.Invetory["Belt"] += 1;
+            gameManager.itemsToBuyFromVendingMachine["DippingBelt"] -= 1;
+            gameManager.athleteBoughtAllItems = BoughtAllItems();
 
         }
         else
@@ -182,9 +204,62 @@ public class PurchaseGymProducts : MonoBehaviour
         {
             DisplayVendingMachinePanel();
         }
+        CanBuyEnergyDrink();
+        CanBuyProtein();
+        CanBuyCreatine();
+        CanBuyGloves();
+        CanBuyDippingBelt();
+
     }
-
-
+    public void CanBuyEnergyDrink()
+    {
+        gameManager.itemsToBuyFromVendingMachine.TryGetValue("EnergyDrink", out int energyDrinksToBuy);
+        if (energyDrinksToBuy == 0)
+        {
+            buyEnergyDrinkButton.interactable = false;
+        }
+        else buyEnergyDrinkButton.interactable = true;
+    }
+    public void CanBuyProtein()
+    {
+        gameManager.itemsToBuyFromVendingMachine.TryGetValue("Protein", out int proteinToBuy);
+        if (proteinToBuy == 0)
+        {
+            buyProteinButton.interactable = false;
+        }
+        else buyProteinButton.interactable = true;
+    }
+    public void CanBuyCreatine()
+    {
+        gameManager.itemsToBuyFromVendingMachine.TryGetValue("Creatine", out int creatineToBuy);
+        if (creatineToBuy == 0)
+        {
+            buyCreatineButton.interactable = false;
+        }
+        else buyCreatineButton.interactable = true;
+    }
+    public void CanBuyGloves()
+    {
+        gameManager.itemsToBuyFromVendingMachine.TryGetValue("Gloves", out int glovesToBuy);
+        if (glovesToBuy == 0)
+        {
+            buyGlovesButton.interactable = false;
+        }
+        else buyGlovesButton.interactable = true;
+    }
+    public void CanBuyDippingBelt()
+    {
+        gameManager.itemsToBuyFromVendingMachine.TryGetValue("DippingBelt", out int beltToBuy);
+        if (beltToBuy == 0)
+        {
+            buyDippingBeltButton.interactable = false;
+        }
+        else buyDippingBeltButton.interactable = true;
+    }
+    public bool BoughtAllItems()
+    {
+        return gameManager.itemsToBuyFromVendingMachine.All(item => item.Value == 0);
+    }
 
 
 }

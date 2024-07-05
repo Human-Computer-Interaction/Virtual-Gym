@@ -40,10 +40,7 @@ public class AthleteMovement : MonoBehaviour
         {
             playerCameraRotation.GetComponentInChildren<MouseLook>().enabled = false;
             camera.transform.position = new Vector3(camera.transform.position.x, camera.transform.position.y + 1f, camera.transform.position.z);
-            Debug.Log("Initial Rotation: " + camera.transform.rotation.eulerAngles);
             camera.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
-            Debug.Log("New Rotation: " + camera.transform.rotation.eulerAngles);
-
             if (other.gameObject.CompareTag("Treadmills"))
             {
                 animator.SetBool("isRunning", true);

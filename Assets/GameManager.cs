@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject inventoryPanel;
     [SerializeField] TMP_Text energyDrinksValue;
     [SerializeField] TMP_Text proteinsValue;
-    [SerializeField] TMP_Text creatininesValue;
+    [SerializeField] TMP_Text creatinesValue;
     [SerializeField] TMP_Text glovesValue;
     [SerializeField] TMP_Text beltsValue;
     [SerializeField] GameObject pausePanel;
@@ -129,7 +129,8 @@ public class GameManager : MonoBehaviour
     private bool isMatFinished = false;
 
     public Dictionary<string, float> tasksToFinish;
-
+    public Dictionary<string, int> itemsToBuyFromVendingMachine;
+    public bool athleteBoughtAllItems = false;
     int bonusMoney = 0;
     public void Awake()
     {
@@ -349,11 +350,11 @@ public class GameManager : MonoBehaviour
     {
         var textMeshComponents = PlayerStatsPanel.GetComponentsInChildren<TextMeshProUGUI>();
         textMeshComponents = textMeshComponents.Where(x => x.tag == "StatsValues").ToArray();
-        textMeshComponents[0].text = Math.Round(playerStats.Weight,1).ToString();
+        textMeshComponents[0].text = Math.Round(playerStats.Weight, 1).ToString();
         textMeshComponents[1].text = playerStats.Age.ToString();
         textMeshComponents[2].text = playerStats.Height.ToString();
         textMeshComponents[3].text = playerStats.Money.ToString();
-        textMeshComponents[4].text = Math.Round(playerStats.Stamina,1).ToString();
+        textMeshComponents[4].text = Math.Round(playerStats.Stamina, 1).ToString();
     }
     public void ActivatePanel()
     {
@@ -388,19 +389,10 @@ public class GameManager : MonoBehaviour
             Timer = 0;
         }
     }
-
-    // public bool exerciseComplited(ref float Timer, float maxTime)
-    // {
-    //     if (Timer >= maxTime)
-    //     {
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
     void Start()
     {
         tasksToFinish = new Dictionary<string, float>();
+        itemsToBuyFromVendingMachine = new Dictionary<string, int>();
         rand = new System.Random();
         playerStats = new PlayerStats
         {
@@ -409,18 +401,15 @@ public class GameManager : MonoBehaviour
         };
         playerStats.Invetory.Add("EnergyDrink", 0);
         playerStats.Invetory.Add("Protein", 0);
-        playerStats.Invetory.Add("Creatinine", 0);
+        playerStats.Invetory.Add("Creatine", 0);
         playerStats.Invetory.Add("Gloves", 0);
         playerStats.Invetory.Add("Belt", 0);
         GeneralTimer = 0;
         BMI = CalculateBMI(playerStats);
-        print("BMI " + BMI);
         string bodyType = BodyTypeBasedOnBmi();
-        print("BodyType: " + bodyType);
         InitStats();
         equipmentUse = new EquipmentUse();
     }
-
     public void HelpPanelActivate()
     {
         if (Input.GetKeyDown(KeyCode.F1))
@@ -440,7 +429,7 @@ public class GameManager : MonoBehaviour
     {
         energyDrinksValue.text = playerStats.Invetory["EnergyDrink"].ToString();
         proteinsValue.text = playerStats.Invetory["Protein"].ToString();
-        creatininesValue.text = playerStats.Invetory["Creatinine"].ToString();
+        creatinesValue.text = playerStats.Invetory["Creatine"].ToString();
         glovesValue.text = playerStats.Invetory["Gloves"].ToString();
         beltsValue.text = playerStats.Invetory["Belt"].ToString();
     }

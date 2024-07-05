@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class NutrionistInteraction : MonoBehaviour
 {
@@ -46,7 +44,6 @@ public class NutrionistInteraction : MonoBehaviour
 
         if (gameManager == null)
         {
-            Debug.LogError("GameManager component is not assigned!");
             return;
         }
         InitializeDialogue();
@@ -61,6 +58,14 @@ public class NutrionistInteraction : MonoBehaviour
         if (dialogueText.text == dialogue[index])
         {
             continueButton.SetActive(true);
+        }
+        if (gameManager.athleteBoughtAllItems)
+        {
+            dialogue = new List<string>
+                {
+                    "You have finished your nutrition program. Good Job!",
+                    "Thanks for using PADA Gym."
+                };
         }
     }
 
@@ -124,7 +129,6 @@ public class NutrionistInteraction : MonoBehaviour
 
     public void PassInputsToGameManager()
     {
-        Debug.Log("Calling PassInputsToGameManager");
         gameManager.ActivatePanel();
         FoodProgramBasedOnPhysicalCondition();
     }
@@ -132,7 +136,6 @@ public class NutrionistInteraction : MonoBehaviour
     public void FoodProgramBasedOnPhysicalCondition()
     {
         dialogue.Clear();
-        Debug.Log("Physical Condition: " + gameManager.physicalCondition);
 
         switch (gameManager.physicalCondition)
         {
@@ -141,10 +144,12 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("The fitness instructor gave you a program that will help you gain muscle, but you will have to eat more.");
                 dialogue.Add("Let me show you what to buy from the vending machine.");
                 dialogue.Add("Your food program is ready.");
-                dialogue.Add("1 protein, 1 creatine, 1 dipping zone");
+                dialogue.Add("1 protein, 1 creatine, 1 dipping belt");
                 dialogue.Add("Goal: Significant weight gain and stamina improvement.");
                 dialogue.Add("It will cost you 75$.");
-                
+                gameManager.itemsToBuyFromVendingMachine["Protein"] = 1;
+                gameManager.itemsToBuyFromVendingMachine["Creatine"] = 1;
+                gameManager.itemsToBuyFromVendingMachine["DippingBelt"] = 1;
                 break;
 
             case "Normal":
@@ -155,6 +160,9 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("1 energy drink, 1 protein, 1 pair of gloves");
                 dialogue.Add("Goal: Moderate weight gain and stamina improvement.");
                 dialogue.Add("It will cost you 35$.");
+                gameManager.itemsToBuyFromVendingMachine["EnergyDrink"] = 1;
+                gameManager.itemsToBuyFromVendingMachine["Protein"] = 1;
+                gameManager.itemsToBuyFromVendingMachine["Gloves"] = 1;
                 break;
 
             case "Overweight":
@@ -165,6 +173,8 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("2 energy drinks, 1 pair of gloves");
                 dialogue.Add("Goal: Minimal weight gain but significant stamina improvement.");
                 dialogue.Add("It will cost you 20$.");
+                gameManager.itemsToBuyFromVendingMachine["EnergyDrink"] = 2;
+                gameManager.itemsToBuyFromVendingMachine["Gloves"] = 1;
                 break;
 
             case "Obese":
@@ -175,6 +185,8 @@ public class NutrionistInteraction : MonoBehaviour
                 dialogue.Add("1 energy drink, 1 pair of gloves");
                 dialogue.Add("Goal: Minimal weight gain and minimal stamina improvement.");
                 dialogue.Add("It will cost you 15$.");
+                gameManager.itemsToBuyFromVendingMachine["EnergyDrink"] = 1;
+                gameManager.itemsToBuyFromVendingMachine["Gloves"] = 1;
                 break;
 
             default:
