@@ -482,7 +482,7 @@ public class GameManager : MonoBehaviour
     }
     public bool TasksAreFinished()
     {
-
+        if (tasksToFinish.Count == 0) return false;
         return tasksToFinish.All(x => x.Value == -2);
     }
 }

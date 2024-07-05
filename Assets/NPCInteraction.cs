@@ -68,7 +68,6 @@ public class NPCInteraction : MonoBehaviour
         {
             continueButton.SetActive(true);
         }
-
         if (gameManager.TasksAreFinished())
         {
             dialogue = new List<string>
