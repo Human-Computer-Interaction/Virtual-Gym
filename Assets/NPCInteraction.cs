@@ -70,35 +70,15 @@ public class NPCInteraction : MonoBehaviour
             continueButton.SetActive(true);
         }
 
-        // if (hasCompleted == false)
-        // {
-        //     if (gameManager.equipmentUse.MatUse != -1 &&
-        //         gameManager.equipmentUse.DumbellsUse != -1 &&
-        //         gameManager.equipmentUse.BarUse != -1 &&
-
-        //         gameManager.equipmentUse.LegExtensionUse != -1 &&
-        //         gameManager.equipmentUse.TreadmillUse != -1 &&
-        //         gameManager.equipmentUse.BikeUse != -1)
-        //     {
-        //         if (gameManager.exerciseComplited(ref gameManager.equipmentTimers.MatTimer, gameManager.equipmentUse.MatUse) &&
-        //             gameManager.exerciseComplited(ref gameManager.equipmentTimers.DumbellsTimer, gameManager.equipmentUse.DumbellsUse) &&
-        //             gameManager.exerciseComplited(ref gameManager.equipmentTimers.BarTimer, gameManager.equipmentUse.BarUse) &&
-
-        //             gameManager.exerciseComplited(ref gameManager.equipmentTimers.LegExtensionTimer, gameManager.equipmentUse.LegExtensionUse) &&
-        //             gameManager.exerciseComplited(ref gameManager.equipmentTimers.TreadmillTimer, gameManager.equipmentUse.TreadmillUse) &&
-        //             gameManager.exerciseComplited(ref gameManager.equipmentTimers.BikeTimer, gameManager.equipmentUse.BikeUse))
-        //         {
-        //             dialogue = new List<string>
-        //         {
-        //             "You have finished your exercise. Good Job!",
-        //             "Now you have to eat some food. Ask the nutritionist for more info about the food.",
-        //             "Good luck!",
-        //         };
-        //             hasCompleted = true;
-
-        //         }
-        //     }
-        // }
+        if (gameManager.TasksAreFinished())
+        {
+            dialogue = new List<string>
+                {
+                    "You have finished your exercise. Good Job!",
+                    "Now you have to eat some food. Ask the nutritionist for more info about the food.",
+                    "Good luck!",
+                };
+        }
     }
     public void ZeroText()
     {
@@ -161,11 +141,14 @@ public class NPCInteraction : MonoBehaviour
                     dialogue.Add("Good luck!");
                     gameManager.equipmentUse.TreadmillUse = 10f;
                     gameManager.equipmentUse.BarUse = 20f;
-
                     gameManager.equipmentUse.LegExtensionUse = 10f;
                     gameManager.equipmentUse.DumbellsUse = 10f;
                     gameManager.equipmentUse.BikeUse = 0f;
                     gameManager.equipmentUse.MatUse = 0f;
+                    gameManager.tasksToFinish.Add("Treadmill", 10f);
+                    gameManager.tasksToFinish.Add("Bar", 20f);
+                    gameManager.tasksToFinish.Add("LegExtension", 10f);
+                    gameManager.tasksToFinish.Add("Dumbells", 10f);
                     break;
                 }
             case "Normal":
@@ -180,10 +163,13 @@ public class NPCInteraction : MonoBehaviour
                     gameManager.equipmentUse.TreadmillUse = 10f;
                     gameManager.equipmentUse.BikeUse = 10f;
                     gameManager.equipmentUse.BarUse = 20f;
-
                     gameManager.equipmentUse.LegExtensionUse = 10f;
                     gameManager.equipmentUse.DumbellsUse = 0f;
                     gameManager.equipmentUse.MatUse = 0f;
+                    gameManager.tasksToFinish.Add("Treadmill", 10f);
+                    gameManager.tasksToFinish.Add("Bike", 10f);
+                    gameManager.tasksToFinish.Add("Bar", 20f);
+                    gameManager.tasksToFinish.Add("LegExtension", 10f);
                     break;
                 }
             case "Overweight":
@@ -198,10 +184,13 @@ public class NPCInteraction : MonoBehaviour
                     gameManager.equipmentUse.TreadmillUse = 20f;
                     gameManager.equipmentUse.BikeUse = 20f;
                     gameManager.equipmentUse.BarUse = 20f;
-
                     gameManager.equipmentUse.LegExtensionUse = 10f;
                     gameManager.equipmentUse.DumbellsUse = 0f;
                     gameManager.equipmentUse.MatUse = 0f;
+                    gameManager.tasksToFinish.Add("Treadmill", 20f);
+                    gameManager.tasksToFinish.Add("Bike", 20f);
+                    gameManager.tasksToFinish.Add("Bar", 20f);
+                    gameManager.tasksToFinish.Add("LegExtension", 10f);
                     break;
                 }
             case "Obese":
@@ -211,15 +200,20 @@ public class NPCInteraction : MonoBehaviour
                     dialogue.Add("This program will help you lose weight, but you will have to eat less.");
                     dialogue.Add("Ask the nutritionist for more information about your food program.");
                     dialogue.Add("Your personalized plan is ready.");
-                    dialogue.Add("20' of Treadmill, 20' Bycicle, 20' Bar, 10' of Squats, 10' of Leg Extensions, 10 Dumbells.");
+                    dialogue.Add("20' of Treadmill, 20' Bycicle, 20' Bar, 10' of Push Ups, 10' of Leg Extensions, 10 Dumbells.");
                     dialogue.Add("Good luck");
                     gameManager.equipmentUse.TreadmillUse = 20f;
                     gameManager.equipmentUse.BikeUse = 20f;
                     gameManager.equipmentUse.BarUse = 20f;
-
                     gameManager.equipmentUse.LegExtensionUse = 10f;
                     gameManager.equipmentUse.DumbellsUse = 10f;
                     gameManager.equipmentUse.MatUse = 10f;
+                    gameManager.tasksToFinish.Add("Treadmill", 20f);
+                    gameManager.tasksToFinish.Add("Bike", 20f);
+                    gameManager.tasksToFinish.Add("Bar", 20f);
+                    gameManager.tasksToFinish.Add("LegExtension", 10f);
+                    gameManager.tasksToFinish.Add("Dumbells", 10f);
+                    gameManager.tasksToFinish.Add("Mat", 10f);
 
                     break;
                 }

@@ -128,6 +128,8 @@ public class GameManager : MonoBehaviour
     private bool isBikeFinished = false;
     private bool isMatFinished = false;
 
+    public Dictionary<string, float> tasksToFinish;
+
     int bonusMoney = 0;
     public void Awake()
     {
@@ -167,6 +169,7 @@ public class GameManager : MonoBehaviour
                     playerStats.Money += bonusMoney;
                     InitStats();
                     equipmentUse.BarUse = -2;
+                    tasksToFinish["Bar"] = -2;
                 }
                 else if (equipmentUse.BarUse == -2)
                 {
@@ -189,6 +192,7 @@ public class GameManager : MonoBehaviour
                     playerStats.Money += bonusMoney;
                     InitStats();
                     equipmentUse.LegExtensionUse = -2;
+                    tasksToFinish["LegExtension"] = -2;
                 }
                 else if (equipmentUse.LegExtensionUse == -2)
                 {
@@ -211,6 +215,7 @@ public class GameManager : MonoBehaviour
                     playerStats.Money += bonusMoney;
                     InitStats();
                     equipmentUse.BikeUse = -2;
+                    tasksToFinish["Bike"] = -2;
                 }
                 else if (equipmentUse.BikeUse == -2)
                 {
@@ -233,6 +238,7 @@ public class GameManager : MonoBehaviour
                     playerStats.Money += bonusMoney;
                     InitStats();
                     equipmentUse.TreadmillUse = -2;
+                    tasksToFinish["Treadmill"] = -2;
                 }
                 else if (equipmentUse.TreadmillUse == -2)
                 {
@@ -255,6 +261,7 @@ public class GameManager : MonoBehaviour
                     playerStats.Money += bonusMoney;
                     InitStats();
                     equipmentUse.TreadmillUse = -2;
+                    tasksToFinish["Treadmill"] = -2;
                 }
                 else if (equipmentUse.TreadmillUse == -2)
                 {
@@ -277,6 +284,7 @@ public class GameManager : MonoBehaviour
                     playerStats.Money += bonusMoney;
                     InitStats();
                     equipmentUse.MatUse = -2;
+                    tasksToFinish["Mat"] = -2;
                 }
                 else if (equipmentUse.MatUse == -2)
                 {
@@ -300,6 +308,7 @@ public class GameManager : MonoBehaviour
                     playerStats.Money += bonusMoney;
                     InitStats();
                     equipmentUse.DumbellsUse = -2;
+                    tasksToFinish["Dumbells"] = -2;
                 }
                 else if (equipmentUse.DumbellsUse == -2)
                 {
@@ -388,6 +397,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        tasksToFinish = new Dictionary<string, float>();
         rand = new System.Random();
         playerStats = new PlayerStats
         {
@@ -467,5 +477,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         pausePanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+    }
+    public bool TasksAreFinished()
+    {
+
+        return tasksToFinish.All(x => x.Value == -2);
     }
 }
