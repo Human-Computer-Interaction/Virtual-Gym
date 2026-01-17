@@ -159,52 +159,6 @@ It allows users to perform virtual exercises on various gym equipment, receive g
 
 ---
 
-# Installation & Setup
-
-This guide explains how to install, set up, and run the **Virtual Gym** project from the repository.
-The project provides a **virtual environment** that simulates a gym workout interface, likely built with **web technologies or Unity/WebGL** (depending on the code).
-
-## Prerequisites
-- **Unity Hub**
-- **Unity Editor 2022.3.31f1**
-
----
-
-## Steps to Run from Source
-
-1. **Add Project**  
-   Open Unity Hub and select **Add**, then choose the `Virtual-Gym` project folder.
-
-2. **Build Application**  
-   - Open the project in the Unity Editor.  
-   - Press `Ctrl + Shift + B` to open **Build Settings**.  
-   - Press `Ctrl + B` to build and run the executable.
-
-3. **Launch**  
-   Navigate to the generated **Build** folder and run `VirtualGym.exe`.
-
----
-
-## Technical Details
-
-- **Engine:** Unity  
-- **Programming Language:** C#  
-- **Assets:**  
-  - 3D models sourced from **Sketchfab** (gym environment)  
-  - Character animations sourced from **Mixamo**
-
----
-
-## Architecture
-
-- **State Machine**  
-  Uses a node-based Animator to transition between states such as *Idle*, *Walking*, and various exercise actions based on user input and collisions.
-
-- **Collision System**  
-  Triggers specific exercise modes when the player enters the collision zone of gym equipment.
-
----
-
 # Installation & Setup Guide  
 
 This guide explains how to **install, configure, and run** the **Virtual Gym** project.  
@@ -234,7 +188,7 @@ ProjectSettings/ProjectVersion.txt
 
 ---
 
-## Running the Application (Recommended)
+## Steps to Run from Source
 
 A **ready-to-run executable** is already provided.
 
@@ -255,6 +209,19 @@ VirtualGym.exe
 Double-click the .exe file to launch the application
 
 > No Unity installation is required to run the executable
+
+#### Or
+
+1. **Add Project**  
+   Open Unity Hub and select **Add**, then choose the `Virtual-Gym` project folder.
+
+2. **Build Application**  
+   - Open the project in the Unity Editor.  
+   - Press `Ctrl + Shift + B` to open **Build Settings**.  
+   - Press `Ctrl + B` to build and run the executable.
+
+3. **Launch**  
+   Navigate to the generated **Build** folder and run `VirtualGym.exe`.
 
 ---
 
