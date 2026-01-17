@@ -159,6 +159,24 @@ It allows users to perform virtual exercises on various gym equipment, receive g
 
 ---
 
+## Technical Details
+
+- **Engine:** Unity  
+- **Programming Language:** C#  
+- **Assets:**  
+  - 3D models sourced from **Sketchfab** (gym environment)  
+  - Character animations sourced from **Mixamo**
+
+### Architecture
+
+- **State Machine**  
+  Uses a node-based Animator to transition between states such as *Idle*, *Walking*, and various exercise actions based on user input and collisions.
+
+- **Collision System**  
+  Triggers specific exercise modes when the player enters the collision zone of gym equipment.
+
+---
+
 # Installation & Setup Guide  
 
 This guide explains how to **install, configure, and run** the **Virtual Gym** project.  
