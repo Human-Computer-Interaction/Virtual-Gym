@@ -1,4 +1,4 @@
-# Virtual-Gym<p align="center">
+<p align="center">
   <img src="https://www.especial.gr/wp-content/uploads/2019/03/panepisthmio-dut-attikhs.png" alt="UNIWA" width="150"/>
 </p>
 
